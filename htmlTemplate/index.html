@@ -22,6 +22,57 @@
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+  <script type="text/javascript">
+    var state = {}
+    state.menu = {}
+    state.menu.visible = false;
+
+    state.menu.toggle = function() {
+      console.log("toggle menu");
+
+      if (state.menu.visible) {
+        $("#menu").animate({ 
+          left: "-445px",
+        }, 300 );
+
+        state.menu.visible = false;
+        $( "#menuoff" ).hide();
+      } else {
+        
+        $("#menu").animate({ 
+          left: "0px",
+        }, 300 );
+
+        state.menu.visible = true;
+        $( "#menuoff" ).show();
+      }
+    }
+
+    $( document ).ready(function() {
+      console.log( "ready!" );
+
+      $( "#menubutton" ).click(function() {
+        console.log( "menu click!" );     
+        state.menu.toggle();
+      });
+
+      $( "#menuoff" ).mouseenter( function() { 
+        console.log( "menu off!" );     
+
+        if (state.menu.visible) {
+          state.menu.toggle();  
+        }
+        
+      });
+
+
+
+    });
+
+  </script>
+
 <style type="text/css">
 
 @font-face {
@@ -106,37 +157,129 @@ body {
   shape-outside: polygon(0 0, 0 300px, 100px 300px);
 }
 
+.menuitem:hover { cursor: pointer; color: #fff;}
+
 </style>
 </head>
 
 <body >
 
 
-<!-- WELCOME -->
+<!-- MENU -->
+<div style="position: fixed; z-index: 1000;">
+  <div id="menu" style="height: 1350px; width: 600px; left: -445px; position: relative;">
 
-<div >
+ 
 
-  <div style="position: relative; ">
-
-      <div style="position: absolute; z-index: -100;">
-        <svg height="500" width="800">
-          <polygon points="0,0 220,0 0,450 " style="fill:#cccccc" />
+      <div style="position: absolute; ">
+        <svg height="1350" width="600">
+          <polygon points="232,0 594,0 0,1321 0,517" style="fill:#cccccc" />
         </svg>
       </div>
 
-      <div style="position: absolute; z-index: -100;">
-        <svg height="500" width="800">
-          <polygon points="150,50 170,50 130,130 110,130" style="fill:#fff" />
-        </svg>
-      </div>      
+      <div style="position: absolute; left: 527px; top: 15px; ">
+        <svg height="64" width="45" style="position: absolute;">
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#fff" />
+            </svg>
+      </div>
+           
 
+      <div class="boldf" style="position: absolute; top: 17px; left: 460px; font-size: 23px; font-style: italic;">CONTENT</div>
+      <div style="position: absolute; top: 38px; left: 490px; font-size: 23px; font-style: italic;">BAR</div>
+      <div style="position: absolute; top: 7px; left: 550px; font-size: 50px;">HOME</div>
+
+      
+      <!-- MENU CONCEPTS -->
+      <div class="menuitem" style="position: absolute; z-index: 100; top: 100px; left: 185px; width: 300px; height: 64px;">
+          <div style="position: relative;">
+            
+            <svg height="64" width="45" style="position: absolute;">
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#2aaae1" />
+            </svg>
+
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px;">CONCEPTS</div>
+          </div>
+      </div>       
+
+      <!-- MENU AUDIENCE -->
+      <div class="menuitem" style="position: absolute; z-index: 100; top: 170px; left: 153px; width: 300px; height: 64px;">
+          <div style="position: relative;">
+            
+            <svg height="64" width="45" style="position: absolute;">
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#c1272d" />
+            </svg>
+
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px;">AUDIENCE</div>
+          </div>
+      </div>  
+
+<<<<<<< HEAD
       <div class="boldf" style="position: absolute; top: 50px; left: 28px; font-size: 32px; font-style: italic;">CONTENT</div>
       <div style="position: absolute; top: 78px; left: 65px; font-size: 32px; font-style: italic;">BAR</div>
       <div style="position: absolute; top: 36px; left: 150px; font-size: 66px;">STUDIO</div>
+=======
+      <!-- MENU PHOTOBOOTH -->
+      <div class="menuitem" style="position: absolute; z-index: 100; top: 240px; left: 122px; width: 300px; height: 64px;">
+          <div style="position: relative;">
+            
+            <svg height="64" width="45" style="position: absolute;">
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#8bc541" />
+            </svg>
+>>>>>>> origin/master
+
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px;">PHOTOBOOTH</div>
+          </div>
+      </div>  
+
+      <!-- MENU CLIPAISLE -->
+      <div class="menuitem" style="position: absolute; z-index: 100; top: 310px; left: 91px; width: 300px; height: 64px;">
+          <div style="position: relative;">
+            
+            <svg height="64" width="45" style="position: absolute;">
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#eb416d" />
+            </svg>
+
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px;">CLIPAISLE</div>
+          </div>
+      </div>  
+
+      <!-- MENU STUDIO -->
+      <div class="menuitem" style="position: absolute; z-index: 100; top: 384px; left: 59px; width: 300px; height: 64px;">
+          <div style="position: relative;">
+            
+            <svg height="64" width="45" style="position: absolute;">
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#f69221" />
+            </svg>
+
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px;">STUDIO</div>
+          </div>
+      </div>  
+
+      <!-- MENU CONTACT US -->
+      <div class="menuitem" style="position: absolute; z-index: 100; top: 456px; left: 29px; width: 300px; height: 64px;">
+          <div style="position: relative;">
+            
+            <svg height="64" width="45" style="position: absolute;">
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#333333" />
+            </svg>
+
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px;">CONTACT US</div>
+          </div>
+      </div>        
+
+     <div id="menubutton" style="position: absolute; width: 220px; left: 445px; height: 100px;" >
+      </div>
+
+</div>
+</div>
 
 
-  </div>
+<!-- WELCOME -->
 
+<div id="menuoff" style="display:none; position: fixed; width:100%; height: 100%; z-index: 999;"> 
+</div>
+
+<div >
   <div style="text-align: right; padding: 140px 80px 90px 20px; font-size: 150px; line-height: 150px; font-style: italic; z-index: 100;">WELCOME<br> TO THE<br> CONTENT BAR</div>
 
 </div>
