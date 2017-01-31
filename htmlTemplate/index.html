@@ -89,6 +89,10 @@
         $("#segmentholder").width( $(window).width() );
       } 
 
+        //MENU SIZE
+
+        if ($(window).width() < 1000) { $("#menuholder").css('transform', 'translate(-20%, -20%) scale(0.6)'); } else { $("#menuholder").css('transform', 'translate(-10%, -10%) scale(0.8)'); }
+
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -255,30 +259,40 @@ var hideall = function (skip) {
 <style type="text/css">
 
 @font-face {
-  font-family: 'Placard Condensed';
-  src: url('PlacardMT-Condensed.eot');
-  src: url('PlacardMT-Condensed.eot?#iefix') format('embedded-opentype'),
-    url('PlacardMT-Condensed.woff') format('woff'),
-    url('PlacardMT-Condensed.ttf') format('truetype');
-  font-weight: normal;
+  font-family: 'ScoutItalic';
+  src: url('ScoutCond-BlackItalic.eot');
+  src: url('ScoutCond-BlackItalic.eot?#iefix') format('embedded-opentype'),
+    url('ScoutCond-BlackItalic.woff') format('woff'),
+    url('ScoutCond-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+
+}
+
+@font-face {
+  font-family: 'ScoutBold';
+  src: url('ScoutCond-Black.eot');
+  src: url('ScoutCond-Black.eot?#iefix') format('embedded-opentype'),
+    url('ScoutCond-Black.woff') format('woff'),
+    url('ScoutCond-Black.ttf') format('truetype');
+  font-weight: 900;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'Placard MT Bold Condensed';
-  src: url('PlacardMT-BoldCondensed.eot');
-  src: url('PlacardMT-BoldCondensed.eot?#iefix') format('embedded-opentype'),
-    url('PlacardMT-BoldCondensed.woff') format('woff'),
-    url('PlacardMT-BoldCondensed.ttf') format('truetype');
-  font-weight: bold;
+  font-family: 'ScoutThin';
+  src: url('ScoutCond-Thin.eot');
+  src: url('ScoutCond-Thin.eot?#iefix') format('embedded-opentype'),
+    url('ScoutCond-Thin.woff') format('woff'),
+    url('ScoutCond-Thin.ttf') format('truetype');
+  font-weight: 100;
   font-style: normal;
 }
 
     
 
 * {
-  font-family: 'Placard MT Bold Condensed';
+  font-family: 'ScoutThin';
   font-weight: bold;
   font-style: normal;
       font-size: 1.25em;
@@ -289,6 +303,12 @@ var hideall = function (skip) {
   cursor: pointer;
 }
 
+.mediatext {
+    font-family: 'ScoutThin';
+  font-size: 30px;
+  line-height: 30px;
+}
+
 .mediatext:before {
    content: '';
   width: 150px;
@@ -296,7 +316,7 @@ var hideall = function (skip) {
   float: right;
   shape-outside: polygon(150px 0, 150px 330px, 0px 330px);
   clip-path: polygon(150px 0, 150px 330px, 0px 330px);
-  
+
 }
 
 .segment {
@@ -309,7 +329,21 @@ var hideall = function (skip) {
 
 /* MENU */
 
+
 .menuitem:hover { cursor: pointer; color: #fff;}
+
+.segmentTitles {
+  position: absolute; top: 195px; left: 20px; font-size: 95px; color: #fff;
+  font-family: 'ScoutBold'
+}
+
+.segmentFindOut {
+  position: absolute; top: 10px; color: white; left: 470px; font-size: 30px; font-family: 'ScoutItalic'; 
+}
+
+.segmentMore {
+  position: absolute; top: 37px; color: white; left: 488px; font-size: 30px; font-family: 'ScoutItalic'; 
+}
 
 
 </style>
@@ -344,9 +378,9 @@ var hideall = function (skip) {
       </div>
            
 
-      <div class="boldf" style="position: absolute; top: 17px; left: 460px; font-size: 23px; font-style: italic;">CONTENT</div>
-      <div style="position: absolute; top: 38px; left: 490px; font-size: 23px; font-style: italic;">BAR</div>
-      <div id="menupagename" style="position: absolute; top: 7px; left: 550px; font-size: 50px;">HOME</div>
+      <div class="boldf" style="position: absolute; top: 17px; left: 460px; font-size: 28px; font-family: 'ScoutItalic' ">CONTENT</div>
+      <div style="position: absolute; top: 38px; left: 490px; font-size: 28px; font-family: 'ScoutItalic' ">BAR</div>
+      <div id="menupagename" style="position: absolute; top: 7px; left: 550px; font-size: 50px; font-family: 'ScoutBold">HOME</div>
 
       
       <!-- MENU CONCEPTS -->
@@ -357,7 +391,7 @@ var hideall = function (skip) {
               <polygon points="29,0 45,0 17,63 0,63" style="fill:#2aaae1" />
             </svg>
 
-            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px;">CONCEPTS</div>
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold' ">CONCEPTS</div>
           </div>
       </div>       
 
@@ -369,7 +403,7 @@ var hideall = function (skip) {
               <polygon points="29,0 45,0 17,63 0,63" style="fill:#c1272d" />
             </svg>
 
-            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px;">AUDIENCE</div>
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">AUDIENCE</div>
           </div>
       </div>  
 
@@ -383,7 +417,7 @@ var hideall = function (skip) {
             </svg>
 
 
-            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px;">PHOTOBOOTH</div>
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">PHOTOBOOTH</div>
           </div>
       </div>  
 
@@ -395,7 +429,7 @@ var hideall = function (skip) {
               <polygon points="29,0 45,0 17,63 0,63" style="fill:#eb416d" />
             </svg>
 
-            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px;">CLIPAISLE</div>
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">CLIPAISLE</div>
           </div>
       </div>  
 
@@ -407,7 +441,7 @@ var hideall = function (skip) {
               <polygon points="29,0 45,0 17,63 0,63" style="fill:#f69221" />
             </svg>
 
-            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px;">STUDIO</div>
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">STUDIO</div>
           </div>
       </div>  
 
@@ -419,7 +453,7 @@ var hideall = function (skip) {
               <polygon points="29,0 45,0 17,63 0,63" style="fill:#333333" />
             </svg>
 
-            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px;">CONTACT US</div>
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">CONTACT</div>
           </div>
       </div>        
 
@@ -452,7 +486,7 @@ var hideall = function (skip) {
           </svg>
 
          <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
-          <p id="paragraph1" class="mediatext" align="justify" style=" display:none; font-family: sans-serif; font-size: 16px; color: white; font-weight: 100;">
+          <p id="paragraph1" class="mediatext" align="justify" style=" display:none;  color: white; font-weight: 100;">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
               augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
               dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
@@ -462,14 +496,14 @@ var hideall = function (skip) {
           </div>          
          
           <div id="findoutmore1" style="position: relative;">
-            <div style="position: absolute; top: 10px; color: white; left: 470px; font-size: 30px; font-style: italic;">FIND OUT</div>
-            <div style="position: absolute; top: 40px; color: white; left: 485px; font-size: 30px; font-style: italic;">MORE</div>          
+            <div class="segmentFindOut" >FIND OUT</div>
+            <div class="segmentMore" >MORE</div>          
             <div id="findbutton1" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
           </div>
         
       </div>
 
-      <div style="position: absolute; top: 195px; left: 20px; font-size: 95px; color: #fff;">CONCEPTS</div>
+      <div class="segmentTitles" >CONCEPTS</div>
 
     </div>
     </div>
@@ -485,7 +519,7 @@ var hideall = function (skip) {
           </svg>
 
          <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
-          <p id="paragraph2" class="mediatext" align="justify" style=" display:none; font-family: sans-serif; font-size: 16px; color: white; font-weight: 100;">
+          <p id="paragraph2" class="mediatext" align="justify" style=" display:none; color: white; font-weight: 100;">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
               augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
               dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
@@ -495,14 +529,14 @@ var hideall = function (skip) {
           </div>          
          
           <div id="findoutmore2" style="position: relative;">
-            <div style="position: absolute; top: 10px; color: white; left: 470px; font-size: 30px; font-style: italic;">FIND OUT</div>
-            <div style="position: absolute; top: 40px; color: white; left: 485px; font-size: 30px; font-style: italic;">MORE</div>          
+            <div class="segmentFindOut" >FIND OUT</div>
+            <div class="segmentMore" >MORE</div>          
             <div id="findbutton2" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
           </div>
         
       </div>
 
-      <div style="position: absolute; top: 195px; left: 20px; font-size: 95px; color: #fff;">AUDIENCE</div>
+      <div class="segmentTitles" >AUDIENCE</div>
 
     </div>
     </div>
@@ -518,7 +552,7 @@ var hideall = function (skip) {
           </svg>
 
          <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
-          <p id="paragraph3" class="mediatext" align="justify" style=" display:none; font-family: sans-serif; font-size: 16px; color: white; font-weight: 100;">
+          <p id="paragraph3" class="mediatext" align="justify" style=" display:none; color: white; font-weight: 100;">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
               augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
               dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
@@ -528,14 +562,14 @@ var hideall = function (skip) {
           </div>          
          
           <div id="findoutmore3" style="position: relative;">
-            <div style="position: absolute; top: 10px; color: white; left: 470px; font-size: 30px; font-style: italic;">FIND OUT</div>
-            <div style="position: absolute; top: 40px; color: white; left: 485px; font-size: 30px; font-style: italic;">MORE</div>          
+            <div class="segmentFindOut" >FIND OUT</div>
+            <div class="segmentMore" >MORE</div>          
             <div id="findbutton3" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
           </div>
         
       </div>
 
-      <div style="position: absolute; top: 195px; left: 20px; font-size: 95px; color: #fff;">PHOTOBOOTH</div>
+      <div class="segmentTitles" >PHOTOBOOTH</div>
 
     </div>
     </div>
@@ -551,7 +585,7 @@ var hideall = function (skip) {
           </svg>
 
          <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
-          <p id="paragraph4" class="mediatext" align="justify" style=" display:none; font-family: sans-serif; font-size: 16px; color: white; font-weight: 100;">
+          <p id="paragraph4" class="mediatext" align="justify" style=" display:none; color: white; font-weight: 100;">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
               augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
               dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
@@ -561,14 +595,14 @@ var hideall = function (skip) {
           </div>          
          
           <div id="findoutmore4" style="position: relative;">
-            <div style="position: absolute; top: 10px; color: white; left: 470px; font-size: 30px; font-style: italic;">FIND OUT</div>
-            <div style="position: absolute; top: 40px; color: white; left: 485px; font-size: 30px; font-style: italic;">MORE</div>          
+            <div class="segmentFindOut" >FIND OUT</div>
+            <div class="segmentMore" >MORE</div>          
             <div id="findbutton4" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
           </div>
         
       </div>
 
-      <div style="position: absolute; top: 195px; left: 20px; font-size: 95px; color: #fff;">CLIPAISLE</div>
+      <div class="segmentTitles" >CLIPAISLE</div>
 
     </div>
     </div>
@@ -584,7 +618,7 @@ var hideall = function (skip) {
           </svg>
 
          <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
-          <p id="paragraph5" class="mediatext" align="justify" style=" display:none; font-family: sans-serif; font-size: 16px; color: white; font-weight: 100;">
+          <p id="paragraph5" class="mediatext" align="justify" style=" display:none; color: white; font-weight: 100;">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
               augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
               dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
@@ -594,14 +628,14 @@ var hideall = function (skip) {
           </div>          
          
           <div id="findoutmore5" style="position: relative;">
-            <div style="position: absolute; top: 10px; color: white; left: 470px; font-size: 30px; font-style: italic;">FIND OUT</div>
-            <div style="position: absolute; top: 40px; color: white; left: 485px; font-size: 30px; font-style: italic;">MORE</div>          
+            <div class="segmentFindOut" >FIND OUT</div>
+            <div class="segmentMore" >MORE</div>          
             <div id="findbutton5" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
           </div>
         
       </div>
 
-      <div style="position: absolute; top: 195px; left: 20px; font-size: 95px; color: #fff;">STUDIO</div>
+      <div class="segmentTitles" >STUDIO</div>
 
     </div>
     </div>
@@ -617,7 +651,7 @@ var hideall = function (skip) {
           </svg>
 
          <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
-          <p id="paragraph6" class="mediatext" align="justify" style=" display:none; font-family: sans-serif; font-size: 16px; color: white; font-weight: 100;">
+          <p id="paragraph6" class="mediatext" align="justify" style=" display:none; color: white; font-weight: 100;">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
               augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
               dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
@@ -627,14 +661,14 @@ var hideall = function (skip) {
           </div>          
          
           <div id="findoutmore6" style="position: relative;">
-            <div style="position: absolute; top: 10px; color: white; left: 470px; font-size: 30px; font-style: italic;">FIND OUT</div>
-            <div style="position: absolute; top: 40px; color: white; left: 485px; font-size: 30px; font-style: italic;">MORE</div>          
+            <div class="segmentFindOut" >FIND OUT</div>
+            <div class="segmentMore" >MORE</div>          
             <div id="findbutton6" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
           </div>
         
       </div>
 
-      <div style="position: absolute; top: 195px; left: 20px; font-size: 95px; color: #fff;">CONTACT</div>
+      <div class="segmentTitles" >CONTACT</div>
 
     </div>
     </div>
