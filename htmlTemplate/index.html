@@ -59,6 +59,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     var resizeall = function() {
+      
+
      if ($(window).width() < 4000) {
 
         var scale = ($(window).width()-30) / 600;
@@ -82,7 +84,9 @@
 
       if (( $(window).width() >= 630) && ( $(window).width() < 1245) ) {
         $("#segmentholder").width( 630 ); 
-      
+
+
+
       }
 
       if ( $(window).width() < 630) { 
@@ -265,7 +269,6 @@ var hideall = function (skip) {
     url('ScoutCond-BlackItalic.woff') format('woff'),
     url('ScoutCond-BlackItalic.ttf') format('truetype');
   font-weight: 900;
-  font-style: italic;
 
 }
 
@@ -292,11 +295,9 @@ var hideall = function (skip) {
     
 
 * {
-  font-family: 'ScoutThin';
-  font-weight: bold;
-  font-style: normal;
-      font-size: 1.25em;
-      margin: 0; padding: 0;
+  font-family: 'ScoutItalic';
+  font-size: 1.25em;
+  margin: 0; padding: 0;
 }
 
 .findbutton {
@@ -334,7 +335,7 @@ var hideall = function (skip) {
 
 .segmentTitles {
   position: absolute; top: 195px; left: 20px; font-size: 95px; color: #fff;
-  font-family: 'ScoutBold'
+  font-family: 'ScoutBold';
 }
 
 .segmentFindOut {
@@ -378,9 +379,9 @@ var hideall = function (skip) {
       </div>
            
 
-      <div class="boldf" style="position: absolute; top: 17px; left: 460px; font-size: 28px; font-family: 'ScoutItalic' ">CONTENT</div>
-      <div style="position: absolute; top: 38px; left: 490px; font-size: 28px; font-family: 'ScoutItalic' ">BAR</div>
-      <div id="menupagename" style="position: absolute; top: 7px; left: 550px; font-size: 50px; font-family: 'ScoutBold">HOME</div>
+      <div class="boldf" style="position: absolute; top: 17px; left: 460px; font-size: 28px; font-family: 'ScoutItalic'; ">CONTENT</div>
+      <div style="position: absolute; top: 38px; left: 490px; font-size: 28px; font-family: 'ScoutItalic'; ">BAR</div>
+      <div id="menupagename" style="position: absolute; top: 7px; left: 550px; font-size: 50px; font-family: 'ScoutBold'; ">HOME</div>
 
       
       <!-- MENU CONCEPTS -->
@@ -391,7 +392,7 @@ var hideall = function (skip) {
               <polygon points="29,0 45,0 17,63 0,63" style="fill:#2aaae1" />
             </svg>
 
-            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold' ">CONCEPTS</div>
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'; ">CONCEPTS</div>
           </div>
       </div>       
 
