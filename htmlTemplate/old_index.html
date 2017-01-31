@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>ContentBar</title>
+  <meta name="description" content="">
+  <meta name="author" content="Rouan van der Ende (bitlab.io)">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+  <script type="text/javascript">
+    var state = {}
+    state.menu = {}
+    state.menu.visible = false;
+
+    state.menu.toggle = function() {
+      console.log("toggle menu");
+
+      if (state.menu.visible) {
+        $("#menu").animate({ 
+          left: "-445px",
+        }, 300 );
+
+        state.menu.visible = false;
+        $( "#menuoff" ).hide();
+      } else {
+        
+        $("#menu").animate({ 
+          left: "0px",
+        }, 300 );
+
+        state.menu.visible = true;
+        $( "#menuoff" ).show();
+      }
+    }
+
+    $( document ).ready(function() {
+      console.log( "ready!" );
+
+      $( "#menubutton" ).click(function() {
+        console.log( "menu click!" );     
+        state.menu.toggle();
+      });
+
+      $( "#menuoff" ).mouseenter( function() { 
+        console.log( "menu off!" );     
+
+        if (state.menu.visible) {
+          state.menu.toggle();  
+        }
+        
+      });
+
+
+
+    });
+
+  </script>
+
+<style type="text/css">
+
+@font-face {
+  font-family: 'Placard Condensed';
+  src: url('PlacardMT-Condensed.eot');
+  src: url('PlacardMT-Condensed.eot?#iefix') format('embedded-opentype'),
+    url('PlacardMT-Condensed.woff') format('woff'),
+    url('PlacardMT-Condensed.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Placard MT Bold Condensed';
+  src: url('PlacardMT-BoldCondensed.eot');
+  src: url('PlacardMT-BoldCondensed.eot?#iefix') format('embedded-opentype'),
+    url('PlacardMT-BoldCondensed.woff') format('woff'),
+    url('PlacardMT-BoldCondensed.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+    
+
+* {
+  font-family: 'Placard MT Bold Condensed';
+  font-weight: bold;
+  font-style: normal;
+      font-size: 1.25em;
+      margin: 0; padding: 0;
+}
+
+hr { border-bottom: 2px solid #f00; }
+
+body {
+  background-color: white;
+}
+
+.thinf {
+  font-family: 'Placard Condensed';
+  font-weight: normal;
+  font-style: normal;
+}
+
+.boldf {
+  font-family: 'Placard MT Bold Condensed';
+  font-weight: bold;
+  font-style: normal;
+}
+
+.slantedright {
+  float:left;
+}
+
+.mediatext:before {
+   content: '';
+  width: 250px;
+    height: 450px;
+  float: right;
+  shape-outside: polygon(250px 0, 250px 450px, 0px 450px);
+  clip-path: polygon(250px 0, 250px 450px, 0px 450px);
+  
+}
+
+.slantedtext {
+  color: #ffffff;
+  font-family:'Libre Baskerville', sans-serif;
+  font-size: 21px;
+  letter-spacing: .025em;
+  line-height: 32px;
+  width: 550px;
+}
+
+.slanted:before {
+  content: '';
+  width: 0;
+    height: 0;
+    border-bottom: 300px solid #28b7d8;
+    border-right: 100px solid transparent;
+  float: left;
+  shape-outside: polygon(0 0, 0 300px, 100px 300px);
+}
+
+.menuitem:hover { cursor: pointer; color: #fff;}
+
+</style>
+</head>
+
+<body >
+
+
+<!-- MENU -->
+<div style="position: fixed; z-index: 1000;">
+  <div id="menu" style="height: 1350px; width: 600px; left: -445px; position: relative;">
+
+ 
+
+      <div style="position: absolute; ">
+        <svg height="1350" width="600">
+          <polygon points="232,0 594,0 0,1321 0,517" style="fill:#cccccc" />
+        </svg>
+      </div>
+
+      <div style="position: absolute; left: 527px; top: 15px; ">
+        <svg height="64" width="45" style="position: absolute;">
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#fff" />
+            </svg>
+      </div>
+           
+
+      <div class="boldf" style="position: absolute; top: 17px; left: 460px; font-size: 23px; font-style: italic;">CONTENT</div>
+      <div style="position: absolute; top: 38px; left: 490px; font-size: 23px; font-style: italic;">BAR</div>
+      <div style="position: absolute; top: 7px; left: 550px; font-size: 50px;">HOME</div>
+
+      
+      <!-- MENU CONCEPTS -->
+      <div class="menuitem" style="position: absolute; z-index: 100; top: 100px; left: 185px; width: 300px; height: 64px;">
+          <div style="position: relative;">
+            
+            <svg height="64" width="45" style="position: absolute;">
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#2aaae1" />
+            </svg>
+
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px;">CONCEPTS</div>
+          </div>
+      </div>       
+
+      <!-- MENU AUDIENCE -->
+      <div class="menuitem" style="position: absolute; z-index: 100; top: 170px; left: 153px; width: 300px; height: 64px;">
+          <div style="position: relative;">
+            
+            <svg height="64" width="45" style="position: absolute;">
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#c1272d" />
+            </svg>
+
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px;">AUDIENCE</div>
+          </div>
+      </div>  
+
+
+      <!-- MENU PHOTOBOOTH -->
+      <div class="menuitem" style="position: absolute; z-index: 100; top: 240px; left: 122px; width: 300px; height: 64px;">
+          <div style="position: relative;">
+            
+            <svg height="64" width="45" style="position: absolute;">
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#8bc541" />
+            </svg>
+
+
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px;">PHOTOBOOTH</div>
+          </div>
+      </div>  
+
+      <!-- MENU CLIPAISLE -->
+      <div class="menuitem" style="position: absolute; z-index: 100; top: 310px; left: 91px; width: 300px; height: 64px;">
+          <div style="position: relative;">
+            
+            <svg height="64" width="45" style="position: absolute;">
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#eb416d" />
+            </svg>
+
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px;">CLIPAISLE</div>
+          </div>
+      </div>  
+
+      <!-- MENU STUDIO -->
+      <div class="menuitem" style="position: absolute; z-index: 100; top: 384px; left: 59px; width: 300px; height: 64px;">
+          <div style="position: relative;">
+            
+            <svg height="64" width="45" style="position: absolute;">
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#f69221" />
+            </svg>
+
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px;">STUDIO</div>
+          </div>
+      </div>  
+
+      <!-- MENU CONTACT US -->
+      <div class="menuitem" style="position: absolute; z-index: 100; top: 456px; left: 29px; width: 300px; height: 64px;">
+          <div style="position: relative;">
+            
+            <svg height="64" width="45" style="position: absolute;">
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#333333" />
+            </svg>
+
+            <div style="position: absolute; top: -15px; left: 25px; font-size: 58px;">CONTACT US</div>
+          </div>
+      </div>        
+
+     <div id="menubutton" style="position: absolute; width: 220px; left: 445px; height: 100px;" >
+      </div>
+
+</div>
+</div>
+
+
+<!-- WELCOME -->
+
+<div id="menuoff" style="display:none; position: fixed; width:100%; height: 100%; z-index: 999;"> 
+</div>
+
+<div >
+  <div style="text-align: right; padding: 140px 80px 90px 20px; font-size: 150px; line-height: 150px; font-style: italic; z-index: 100;">WELCOME<br> TO THE<br> CONTENT BAR</div>
+
+</div>
+
+
+
+<!-- CONCEPTS -->
+
+
+<div style="height: 450px; margin-top: 0px;">
+
+  <div style="position: relative; ">
+
+
+  
+        <div class="center-cropped" style="position: absolute; width: 100%; height: 450px; overflow: hidden; background: #171711;">
+          <img src="images/jaguar.jpg" style="height:450px; position:absolute; left: 150px;" />
+        </div>
+
+        <div style="color: #fff; position: absolute; left: 175px; top: 300px; font-size: 150px; line-height: 150px; z-index: 100;">CONCEPTS</div>
+
+      <div style="position: absolute; ">
+        <svg height="500" width="800">
+          <polygon points="0,0 370,0 150,450 0,450" style="fill:#fff" />
+        </svg>
+      </div>
+
+      <div style="position: absolute; ">
+        <svg height="500" width="800">
+          <polygon points="0,0 270,0 50,450 0,450" style="fill:#2aaae1" />
+        </svg>
+      </div>
+
+   
+
+      <div style="position: absolute; top: 20px; color: white; left: 120px; font-size: 30px; font-style: italic;">FIND OUT</div>
+      <div style="position: absolute; top: 50px; color: white; left: 130px; font-size: 30px; font-style: italic;">MORE</div>
+
+
+
+  </div>
+
+  
+
+
+</div>
+
+<!-- MEDIA -->
+
+<div style="height: 450px; margin-top: 100px;">
+
+  <div style="position: relative; ">
+
+
+  
+        <div class="center-cropped" style="position: absolute; width: 100%; height: 450px; overflow: hidden; background: #cccccc;">
+         
+        </div>
+
+ 
+ 
+
+      <!-- RED -->
+      <div style="position: absolute; ">
+        <svg height="500" width="1200">
+          <polygon points="0,0 1070,0 850,450 0,450" style="fill:#c1272d" />
+        </svg>
+      </div>
+
+      <!-- SMALL  -->
+      <div style="position: absolute; ">
+        <svg height="500" width="800">
+          <polygon points="150,50 170,50 130,130 110,130" style="fill:#000" />
+        </svg>
+      </div>  
+
+      <div style="position: absolute; color: white; top: 50px; left: 28px; font-size: 32px; font-style: italic;">CONTENT</div>
+      <div style="position: absolute; top: 78px; color: white; left: 65px; font-size: 32px; font-style: italic;">BAR</div>
+      <div style="position: absolute; top: 36px; color: white; left: 150px; font-size: 66px;">MEDIA</div>
+
+      <div style="position: absolute; color: white; top: 20px; left: 950px; font-size: 32px; font-style: italic;">CLOSE</div>
+
+      <div style="position: absolute; width: 900px; top: 150px; left: 50px; ">
+      <p class="mediatext" align="justify" style="font-family: sans-serif; font-size: 20px; color: white; font-weight: 100;">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
+          augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
+          dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
+          amet rhoncus arcu massa sed lectus. Nam fringilla velit in luctus
+          fringilla. Fusce vel orci massa. Mauris in purus molestie, rutrum
+          risus sit amet, ullamcorper eros. Donec vel leo a tortor feugiat
+          vulputate. Donec fermentum neque eu neque molestie.</p>
+      </div>
+
+  </div>
+
+  
+
+
+</div>
+
+<!-- PHOTOBOOTH -->
+
+<div style="height: 450px;margin-top: 100px;">
+
+  <div style="position: relative; ">
+
+
+  
+        <div class="center-cropped" style="position: absolute; width: 100%; height: 450px; overflow: hidden; background: #e2e0df;">
+          <img src="images/booth.jpg" style="height:450px; position:absolute; left: 150px;" />
+        </div>
+
+        <div style="color: #fff; position: absolute; left: 175px; top: 300px; font-size: 150px; line-height: 150px; z-index: 100;">PHOTOBOOTH</div>
+
+      <div style="position: absolute; ">
+        <svg height="500" width="800">
+          <polygon points="0,0 370,0 150,450 0,450" style="fill:#fff" />
+        </svg>
+      </div>
+
+      <div style="position: absolute; ">
+        <svg height="500" width="800">
+          <polygon points="0,0 270,0 50,450 0,450" style="fill:#8bc541" />
+        </svg>
+      </div>
+
+   
+
+      <div style="position: absolute; top: 20px; color: white; left: 120px; font-size: 30px; font-style: italic;">FIND OUT</div>
+      <div style="position: absolute; top: 50px; color: white; left: 130px; font-size: 30px; font-style: italic;">MORE</div>
+
+
+
+  </div>
+
+</div>
+
+<!-- CLIPAISLE -->
+
+<div style="height: 450px;margin-top: 100px;">
+
+  <div style="position: relative; ">
+  
+        <div class="center-cropped" style="position: absolute; width: 100%; height: 450px; overflow: hidden; background: #05030b;">
+          <img src="images/clipaisle.jpg" style="height:450px; position:absolute; left: 150px;" />
+        </div>
+
+        <div style="color: #fff; position: absolute; left: 175px; top: 300px; font-size: 150px; line-height: 150px; z-index: 100;">CLIPAISLE</div>
+
+      <div style="position: absolute; ">
+        <svg height="500" width="800">
+          <polygon points="0,0 370,0 150,450 0,450" style="fill:#fff" />
+        </svg>
+      </div>
+
+      <div style="position: absolute; ">
+        <svg height="500" width="800">
+          <polygon points="0,0 270,0 50,450 0,450" style="fill:#eb416d" />
+        </svg>
+      </div>
+
+      <div style="position: absolute; top: 20px; color: white; left: 120px; font-size: 30px; font-style: italic;">FIND OUT</div>
+      <div style="position: absolute; top: 50px; color: white; left: 130px; font-size: 30px; font-style: italic;">MORE</div>
+
+  </div>
+
+</div>
+
+<!-- STUDIO -->
+
+<div style="height: 450px;margin-top: 100px;">
+
+  <div style="position: relative; ">
+  
+        <div class="center-cropped" style="position: absolute; width: 100%; height: 450px; overflow: hidden; background: #333333;">
+          
+        </div>
+
+        <div style="color: #fff; position: absolute; left: 175px; top: 300px; font-size: 150px; line-height: 150px; z-index: 100;">STUDIO</div>
+
+      <div style="position: absolute; ">
+        <svg height="500" width="800">
+          <polygon points="0,0 370,0 150,450 0,450" style="fill:#fff" />
+        </svg>
+      </div>
+
+      <div style="position: absolute; ">
+        <svg height="500" width="800">
+          <polygon points="0,0 270,0 50,450 0,450" style="fill:#f69221" />
+        </svg>
+      </div>
+
+      <div style="position: absolute; top: 20px; color: white; left: 120px; font-size: 30px; font-style: italic;">FIND OUT</div>
+      <div style="position: absolute; top: 50px; color: white; left: 130px; font-size: 30px; font-style: italic;">MORE</div>
+
+  </div>
+
+</div>
+
+
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

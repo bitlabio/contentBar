@@ -25,6 +25,7 @@
 
   <script type="text/javascript" src="jquery-3.1.1.min.js"></script>
   <script type="text/javascript">
+
     var state = {}
     state.menu = {}
     state.menu.visible = false;
@@ -39,6 +40,8 @@
 
         state.menu.visible = false;
         $( "#menuoff" ).hide();
+        $("#menuholder").css("z-index", -1)
+        $("#menupagename").fadeIn();
       } else {
         
         $("#menu").animate({ 
@@ -47,15 +50,182 @@
 
         state.menu.visible = true;
         $( "#menuoff" ).show();
+
+        $("#menuholder").css("z-index", 1)
+        $("#menupagename").fadeOut();
       }
     }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    var resizeall = function() {
+     if ($(window).width() < 4000) {
+
+        var scale = ($(window).width()-30) / 600;
+        if (scale > 1) { scale = 1}
+        var s = 1-scale
+        s = s / 2; 
+        s = Math.round(s * 100);
+        $(".segment").css("transform", "translate(-"+s+"%, -"+s+"%) scale("+scale+")")
+        $(".segment").height(330 * scale)
+      }
+
+      console.log( $(window).width() )
+
+      if ( $(window).width() >= 1860) { 
+        $("#segmentholder").width( 1860);
+      } 
+
+      if (( $(window).width() >= 1245) && ( $(window).width() < 1860) ) { 
+        $("#segmentholder").width( 1245);
+      }
+
+      if (( $(window).width() >= 630) && ( $(window).width() < 1245) ) {
+        $("#segmentholder").width( 630 ); 
+      
+      }
+
+      if ( $(window).width() < 630) { 
+        $("#segmentholder").width( $(window).width() );
+      } 
+
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+var segment1on = function () {  
+  $("#slidepanel1").animate({ left: "0px", }, 300 ); 
+  $("#findoutmore1").fadeOut(); 
+  $("#paragraph1").fadeIn(); 
+}
+
+var segment1off = function () {  
+  $("#slidepanel1").animate({ left: "-450px", }, 300 ); 
+  $("#findoutmore1").fadeIn(); 
+  $("#paragraph1").fadeOut(); 
+}
+
+
+
+var segment2on = function () {  
+  $("#slidepanel2").animate({ left: "0px", }, 300 ); 
+  $("#findoutmore2").fadeOut(); 
+  $("#paragraph2").fadeIn(); 
+}
+
+var segment2off = function () {  
+  $("#slidepanel2").animate({ left: "-450px", }, 300 ); 
+  $("#findoutmore2").fadeIn(); 
+  $("#paragraph2").fadeOut(); 
+}
+
+
+
+var segment3on = function () {  
+  $("#slidepanel3").animate({ left: "0px", }, 300 ); 
+  $("#findoutmore3").fadeOut(); 
+  $("#paragraph3").fadeIn(); 
+}
+
+var segment3off = function () {  
+  $("#slidepanel3").animate({ left: "-450px", }, 300 ); 
+  $("#findoutmore3").fadeIn(); 
+  $("#paragraph3").fadeOut(); 
+}
+
+
+
+var segment4on = function () {  
+  $("#slidepanel4").animate({ left: "0px", }, 300 ); 
+  $("#findoutmore4").fadeOut(); 
+  $("#paragraph4").fadeIn(); 
+}
+
+var segment4off = function () {  
+  $("#slidepanel4").animate({ left: "-450px", }, 300 ); 
+  $("#findoutmore4").fadeIn(); 
+  $("#paragraph4").fadeOut(); 
+}
+
+
+
+
+var segment5on = function () {  
+  $("#slidepanel5").animate({ left: "0px", }, 300 ); 
+  $("#findoutmore5").fadeOut(); 
+  $("#paragraph5").fadeIn(); 
+}
+
+var segment5off = function () {  
+  $("#slidepanel5").animate({ left: "-450px", }, 300 ); 
+  $("#findoutmore5").fadeIn(); 
+  $("#paragraph5").fadeOut(); 
+}
+
+
+
+var segment6on = function () {  
+  $("#slidepanel6").animate({ left: "0px", }, 300 ); 
+  $("#findoutmore6").fadeOut(); 
+  $("#paragraph6").fadeIn(); 
+}
+
+var segment6off = function () {  
+  $("#slidepanel6").animate({ left: "-450px", }, 300 ); 
+  $("#findoutmore6").fadeIn(); 
+  $("#paragraph6").fadeOut(); 
+}
+
+
+
+
     $( document ).ready(function() {
+      resizeall();
       console.log( "ready!" );
+
+      console.log($(window).width())
+
+ 
+
+
+      var buttonshtml = ``;
+
+      for (var a = 0; a < 10; a++) {
+
+        buttonshtml += `
+          <div style="width: 100px; height: 50px; background: #ff0; float: left;">
+          </div>
+          `;
+
+      }
+
+      //$("#buttonholder").html(buttonshtml)
+
+var hideall = function (skip) {
+  
+  if (skip != 1) { segment1off(); }
+  if (skip != 2) { segment2off(); }
+  if (skip != 3) { segment3off(); }
+  if (skip != 4) { segment4off(); }
+  if (skip != 5) { segment5off(); }
+  if (skip != 6) { segment6off(); }
+  
+  
+}
+
+      $("#findbutton1").mousedown( function () { hideall(1); segment1on();  })
+      $("#findbutton2").mousedown( function () { hideall(2); segment2on(); })
+      $("#findbutton3").mousedown( function () { hideall(3); segment3on(); })
+      $("#findbutton4").mousedown( function () { hideall(4); segment4on(); })
+      $("#findbutton5").mousedown( function () { hideall(5); segment5on(); })
+      $("#findbutton6").mousedown( function () { hideall(6); segment6on(); })
+
+
 
       $( "#menubutton" ).click(function() {
         console.log( "menu click!" );     
         state.menu.toggle();
+
       });
 
       $( "#menuoff" ).mouseenter( function() { 
@@ -69,7 +239,16 @@
 
 
 
+
+
     });
+
+
+
+    $( window ).resize(function() {
+      resizeall();
+    });
+
 
   </script>
 
@@ -106,68 +285,49 @@
       margin: 0; padding: 0;
 }
 
-hr { border-bottom: 2px solid #f00; }
-
-body {
-  background-color: white;
-}
-
-.thinf {
-  font-family: 'Placard Condensed';
-  font-weight: normal;
-  font-style: normal;
-}
-
-.boldf {
-  font-family: 'Placard MT Bold Condensed';
-  font-weight: bold;
-  font-style: normal;
-}
-
-.slantedright {
-  float:left;
+.findbutton {
+  cursor: pointer;
 }
 
 .mediatext:before {
    content: '';
-  width: 250px;
-    height: 450px;
+  width: 150px;
+    height: 330px;
   float: right;
-  shape-outside: polygon(250px 0, 250px 450px, 0px 450px);
-  clip-path: polygon(250px 0, 250px 450px, 0px 450px);
+  shape-outside: polygon(150px 0, 150px 330px, 0px 330px);
+  clip-path: polygon(150px 0, 150px 330px, 0px 330px);
   
 }
 
-.slantedtext {
-  color: #ffffff;
-  font-family:'Libre Baskerville', sans-serif;
-  font-size: 21px;
-  letter-spacing: .025em;
-  line-height: 32px;
-  width: 550px;
+.segment {
+  transform: scale(1);
+  float: left;
+  margin-right: 15px;
+  margin-bottom: 15px;
 }
 
-.slanted:before {
-  content: '';
-  width: 0;
-    height: 0;
-    border-bottom: 300px solid #28b7d8;
-    border-right: 100px solid transparent;
-  float: left;
-  shape-outside: polygon(0 0, 0 300px, 100px 300px);
-}
+
+/* MENU */
 
 .menuitem:hover { cursor: pointer; color: #fff;}
 
+
 </style>
+
 </head>
 
 <body >
 
 
-<!-- MENU -->
-<div style="position: fixed; z-index: 1000;">
-  <div id="menu" style="height: 1350px; width: 600px; left: -445px; position: relative;">
+
+
+
+
+
+<!-- MENU START-->
+
+<div id="menuholder" style="position: fixed; z-index: -1; top: 0px; transform: translate(-20%, -20%) scale(0.6);">
+  <div id="menu" style="height: 1350px; width: 600px; left: -445px; position: relative; ">
 
  
 
@@ -186,7 +346,7 @@ body {
 
       <div class="boldf" style="position: absolute; top: 17px; left: 460px; font-size: 23px; font-style: italic;">CONTENT</div>
       <div style="position: absolute; top: 38px; left: 490px; font-size: 23px; font-style: italic;">BAR</div>
-      <div style="position: absolute; top: 7px; left: 550px; font-size: 50px;">HOME</div>
+      <div id="menupagename" style="position: absolute; top: 7px; left: 550px; font-size: 50px;">HOME</div>
 
       
       <!-- MENU CONCEPTS -->
@@ -269,215 +429,228 @@ body {
 </div>
 </div>
 
-
-<!-- WELCOME -->
-
-<div id="menuoff" style="display:none; position: fixed; width:100%; height: 100%; z-index: 999;"> 
-</div>
-
-<div >
-  <div style="text-align: right; padding: 140px 80px 90px 20px; font-size: 150px; line-height: 150px; font-style: italic; z-index: 100;">WELCOME<br> TO THE<br> CONTENT BAR</div>
-
-</div>
+<!-- MENU END-->
 
 
 
-<!-- CONCEPTS -->
-
-
-<div style="height: 450px; margin-top: 0px;">
-
-  <div style="position: relative; ">
-
-
-  
-        <div class="center-cropped" style="position: absolute; width: 100%; height: 450px; overflow: hidden; background: #171711;">
-          <img src="images/jaguar.jpg" style="height:450px; position:absolute; left: 150px;" />
-        </div>
-
-        <div style="color: #fff; position: absolute; left: 175px; top: 300px; font-size: 150px; line-height: 150px; z-index: 100;">CONCEPTS</div>
-
-      <div style="position: absolute; ">
-        <svg height="500" width="800">
-          <polygon points="0,0 370,0 150,450 0,450" style="fill:#fff" />
-        </svg>
-      </div>
-
-      <div style="position: absolute; ">
-        <svg height="500" width="800">
-          <polygon points="0,0 270,0 50,450 0,450" style="fill:#2aaae1" />
-        </svg>
-      </div>
-
-   
-
-      <div style="position: absolute; top: 20px; color: white; left: 120px; font-size: 30px; font-style: italic;">FIND OUT</div>
-      <div style="position: absolute; top: 50px; color: white; left: 130px; font-size: 30px; font-style: italic;">MORE</div>
 
 
 
-  </div>
-
-  
 
 
-</div>
+<!-- MAINPAGE -->
+<div id="segmentholder" style="margin: 0 auto; max-width: 1860px; ">
+  <div style="margin: 100px 0 0 0; max-width: 1845px; padding: 15px 0 0 15px; z-index: 2000;  ">
 
-<!-- MEDIA -->
+    <!-- SEGMENT START-->
+    <div class="segment" >
+    <div  style="width: 600px; height: 330px; background: #333; overflow: hidden; position: relative;">
 
-<div style="height: 450px; margin-top: 100px;">
+      <div id="slidepanel1" style="position: relative; top:0px; left: -450px; height: 330px; width: 600px;">
+          <svg height="330" width="600" style="position: absolute;">
+           <polygon points="0,0 600,0 450,330 0,330" style="fill:#2aaae1" />
+          </svg>
 
-  <div style="position: relative; ">
-
-
-  
-        <div class="center-cropped" style="position: absolute; width: 100%; height: 450px; overflow: hidden; background: #cccccc;">
+         <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
+          <p id="paragraph1" class="mediatext" align="justify" style=" display:none; font-family: sans-serif; font-size: 16px; color: white; font-weight: 100;">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
+              augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
+              dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
+              amet rhoncus arcu massa sed lectus. Nam fringilla velit in luctus
+              fringilla. Fusce vel orci massa. Nam fringilla velit in luctus
+              fringilla. Fusce vel orci massa. </p>
+          </div>          
          
-        </div>
-
- 
- 
-
-      <!-- RED -->
-      <div style="position: absolute; ">
-        <svg height="500" width="1200">
-          <polygon points="0,0 1070,0 850,450 0,450" style="fill:#c1272d" />
-        </svg>
+          <div id="findoutmore1" style="position: relative;">
+            <div style="position: absolute; top: 10px; color: white; left: 470px; font-size: 30px; font-style: italic;">FIND OUT</div>
+            <div style="position: absolute; top: 40px; color: white; left: 485px; font-size: 30px; font-style: italic;">MORE</div>          
+            <div id="findbutton1" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
+          </div>
+        
       </div>
 
-      <!-- SMALL  -->
-      <div style="position: absolute; ">
-        <svg height="500" width="800">
-          <polygon points="150,50 170,50 130,130 110,130" style="fill:#000" />
-        </svg>
-      </div>  
+      <div style="position: absolute; top: 195px; left: 20px; font-size: 95px; color: #fff;">CONCEPTS</div>
 
-      <div style="position: absolute; color: white; top: 50px; left: 28px; font-size: 32px; font-style: italic;">CONTENT</div>
-      <div style="position: absolute; top: 78px; color: white; left: 65px; font-size: 32px; font-style: italic;">BAR</div>
-      <div style="position: absolute; top: 36px; color: white; left: 150px; font-size: 66px;">MEDIA</div>
+    </div>
+    </div>
+    <!-- SEGMENT END -->
 
-      <div style="position: absolute; color: white; top: 20px; left: 950px; font-size: 32px; font-style: italic;">CLOSE</div>
+    <!-- SEGMENT START-->
+    <div class="segment" >
+    <div  style="width: 600px; height: 330px; background: #333; overflow: hidden; position: relative;">
 
-      <div style="position: absolute; width: 900px; top: 150px; left: 50px; ">
-      <p class="mediatext" align="justify" style="font-family: sans-serif; font-size: 20px; color: white; font-weight: 100;">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
-          augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
-          dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
-          amet rhoncus arcu massa sed lectus. Nam fringilla velit in luctus
-          fringilla. Fusce vel orci massa. Mauris in purus molestie, rutrum
-          risus sit amet, ullamcorper eros. Donec vel leo a tortor feugiat
-          vulputate. Donec fermentum neque eu neque molestie.</p>
+      <div id="slidepanel2" style="position: relative; top:0px; left: -450px; height: 330px; width: 600px;">
+          <svg height="330" width="600" style="position: absolute;">
+           <polygon points="0,0 600,0 450,330 0,330" style="fill:#c1272d" />
+          </svg>
+
+         <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
+          <p id="paragraph2" class="mediatext" align="justify" style=" display:none; font-family: sans-serif; font-size: 16px; color: white; font-weight: 100;">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
+              augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
+              dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
+              amet rhoncus arcu massa sed lectus. Nam fringilla velit in luctus
+              fringilla. Fusce vel orci massa. Nam fringilla velit in luctus
+              fringilla. Fusce vel orci massa. </p>
+          </div>          
+         
+          <div id="findoutmore2" style="position: relative;">
+            <div style="position: absolute; top: 10px; color: white; left: 470px; font-size: 30px; font-style: italic;">FIND OUT</div>
+            <div style="position: absolute; top: 40px; color: white; left: 485px; font-size: 30px; font-style: italic;">MORE</div>          
+            <div id="findbutton2" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
+          </div>
+        
       </div>
 
-  </div>
+      <div style="position: absolute; top: 195px; left: 20px; font-size: 95px; color: #fff;">AUDIENCE</div>
 
-  
+    </div>
+    </div>
+    <!-- SEGMENT END -->
 
+    <!-- SEGMENT START-->
+    <div class="segment" >
+    <div  style="width: 600px; height: 330px; background: #333; overflow: hidden; position: relative;">
+
+      <div id="slidepanel3" style="position: relative; top:0px; left: -450px; height: 330px; width: 600px;">
+          <svg height="330" width="600" style="position: absolute;">
+           <polygon points="0,0 600,0 450,330 0,330" style="fill:#8bc541" />
+          </svg>
+
+         <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
+          <p id="paragraph3" class="mediatext" align="justify" style=" display:none; font-family: sans-serif; font-size: 16px; color: white; font-weight: 100;">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
+              augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
+              dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
+              amet rhoncus arcu massa sed lectus. Nam fringilla velit in luctus
+              fringilla. Fusce vel orci massa. Nam fringilla velit in luctus
+              fringilla. Fusce vel orci massa. </p>
+          </div>          
+         
+          <div id="findoutmore3" style="position: relative;">
+            <div style="position: absolute; top: 10px; color: white; left: 470px; font-size: 30px; font-style: italic;">FIND OUT</div>
+            <div style="position: absolute; top: 40px; color: white; left: 485px; font-size: 30px; font-style: italic;">MORE</div>          
+            <div id="findbutton3" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
+          </div>
+        
+      </div>
+
+      <div style="position: absolute; top: 195px; left: 20px; font-size: 95px; color: #fff;">PHOTOBOOTH</div>
+
+    </div>
+    </div>
+    <!-- SEGMENT END -->
+
+    <!-- SEGMENT START-->
+    <div class="segment" >
+    <div  style="width: 600px; height: 330px; background: #333; overflow: hidden; position: relative;">
+
+      <div id="slidepanel4" style="position: relative; top:0px; left: -450px; height: 330px; width: 600px;">
+          <svg height="330" width="600" style="position: absolute;">
+           <polygon points="0,0 600,0 450,330 0,330" style="fill:#eb416d" />
+          </svg>
+
+         <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
+          <p id="paragraph4" class="mediatext" align="justify" style=" display:none; font-family: sans-serif; font-size: 16px; color: white; font-weight: 100;">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
+              augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
+              dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
+              amet rhoncus arcu massa sed lectus. Nam fringilla velit in luctus
+              fringilla. Fusce vel orci massa. Nam fringilla velit in luctus
+              fringilla. Fusce vel orci massa. </p>
+          </div>          
+         
+          <div id="findoutmore4" style="position: relative;">
+            <div style="position: absolute; top: 10px; color: white; left: 470px; font-size: 30px; font-style: italic;">FIND OUT</div>
+            <div style="position: absolute; top: 40px; color: white; left: 485px; font-size: 30px; font-style: italic;">MORE</div>          
+            <div id="findbutton4" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
+          </div>
+        
+      </div>
+
+      <div style="position: absolute; top: 195px; left: 20px; font-size: 95px; color: #fff;">CLIPAISLE</div>
+
+    </div>
+    </div>
+    <!-- SEGMENT END -->
+
+    <!-- SEGMENT START-->
+    <div class="segment" >
+    <div  style="width: 600px; height: 330px; background: #333; overflow: hidden; position: relative;">
+
+      <div id="slidepanel5" style="position: relative; top:0px; left: -450px; height: 330px; width: 600px;">
+          <svg height="330" width="600" style="position: absolute;">
+           <polygon points="0,0 600,0 450,330 0,330" style="fill:#f69221" />
+          </svg>
+
+         <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
+          <p id="paragraph5" class="mediatext" align="justify" style=" display:none; font-family: sans-serif; font-size: 16px; color: white; font-weight: 100;">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
+              augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
+              dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
+              amet rhoncus arcu massa sed lectus. Nam fringilla velit in luctus
+              fringilla. Fusce vel orci massa. Nam fringilla velit in luctus
+              fringilla. Fusce vel orci massa. </p>
+          </div>          
+         
+          <div id="findoutmore5" style="position: relative;">
+            <div style="position: absolute; top: 10px; color: white; left: 470px; font-size: 30px; font-style: italic;">FIND OUT</div>
+            <div style="position: absolute; top: 40px; color: white; left: 485px; font-size: 30px; font-style: italic;">MORE</div>          
+            <div id="findbutton5" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
+          </div>
+        
+      </div>
+
+      <div style="position: absolute; top: 195px; left: 20px; font-size: 95px; color: #fff;">STUDIO</div>
+
+    </div>
+    </div>
+    <!-- SEGMENT END -->
+
+    <!-- SEGMENT START-->
+    <div class="segment" >
+    <div  style="width: 600px; height: 330px; background: #666666; overflow: hidden; position: relative;">
+
+      <div id="slidepanel6" style="position: relative; top:0px; left: -450px; height: 330px; width: 600px;">
+          <svg height="330" width="600" style="position: absolute;">
+           <polygon points="0,0 600,0 450,330 0,330" style="fill:#333333" />
+          </svg>
+
+         <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
+          <p id="paragraph6" class="mediatext" align="justify" style=" display:none; font-family: sans-serif; font-size: 16px; color: white; font-weight: 100;">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
+              augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
+              dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
+              amet rhoncus arcu massa sed lectus. Nam fringilla velit in luctus
+              fringilla. Fusce vel orci massa. Nam fringilla velit in luctus
+              fringilla. Fusce vel orci massa. </p>
+          </div>          
+         
+          <div id="findoutmore6" style="position: relative;">
+            <div style="position: absolute; top: 10px; color: white; left: 470px; font-size: 30px; font-style: italic;">FIND OUT</div>
+            <div style="position: absolute; top: 40px; color: white; left: 485px; font-size: 30px; font-style: italic;">MORE</div>          
+            <div id="findbutton6" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
+          </div>
+        
+      </div>
+
+      <div style="position: absolute; top: 195px; left: 20px; font-size: 95px; color: #fff;">CONTACT</div>
+
+    </div>
+    </div>
+    <!-- SEGMENT END -->                
+
+    <div style="clear:both;"></div>
 
 </div>
 
-<!-- PHOTOBOOTH -->
-
-<div style="height: 450px;margin-top: 100px;">
-
-  <div style="position: relative; ">
-
-
-  
-        <div class="center-cropped" style="position: absolute; width: 100%; height: 450px; overflow: hidden; background: #e2e0df;">
-          <img src="images/booth.jpg" style="height:450px; position:absolute; left: 150px;" />
-        </div>
-
-        <div style="color: #fff; position: absolute; left: 175px; top: 300px; font-size: 150px; line-height: 150px; z-index: 100;">PHOTOBOOTH</div>
-
-      <div style="position: absolute; ">
-        <svg height="500" width="800">
-          <polygon points="0,0 370,0 150,450 0,450" style="fill:#fff" />
-        </svg>
-      </div>
-
-      <div style="position: absolute; ">
-        <svg height="500" width="800">
-          <polygon points="0,0 270,0 50,450 0,450" style="fill:#8bc541" />
-        </svg>
-      </div>
-
-   
-
-      <div style="position: absolute; top: 20px; color: white; left: 120px; font-size: 30px; font-style: italic;">FIND OUT</div>
-      <div style="position: absolute; top: 50px; color: white; left: 130px; font-size: 30px; font-style: italic;">MORE</div>
-
-
-
-  </div>
-
-</div>
-
-<!-- CLIPAISLE -->
-
-<div style="height: 450px;margin-top: 100px;">
-
-  <div style="position: relative; ">
-  
-        <div class="center-cropped" style="position: absolute; width: 100%; height: 450px; overflow: hidden; background: #05030b;">
-          <img src="images/clipaisle.jpg" style="height:450px; position:absolute; left: 150px;" />
-        </div>
-
-        <div style="color: #fff; position: absolute; left: 175px; top: 300px; font-size: 150px; line-height: 150px; z-index: 100;">CLIPAISLE</div>
-
-      <div style="position: absolute; ">
-        <svg height="500" width="800">
-          <polygon points="0,0 370,0 150,450 0,450" style="fill:#fff" />
-        </svg>
-      </div>
-
-      <div style="position: absolute; ">
-        <svg height="500" width="800">
-          <polygon points="0,0 270,0 50,450 0,450" style="fill:#eb416d" />
-        </svg>
-      </div>
-
-      <div style="position: absolute; top: 20px; color: white; left: 120px; font-size: 30px; font-style: italic;">FIND OUT</div>
-      <div style="position: absolute; top: 50px; color: white; left: 130px; font-size: 30px; font-style: italic;">MORE</div>
-
-  </div>
-
-</div>
-
-<!-- STUDIO -->
-
-<div style="height: 450px;margin-top: 100px;">
-
-  <div style="position: relative; ">
-  
-        <div class="center-cropped" style="position: absolute; width: 100%; height: 450px; overflow: hidden; background: #333333;">
-          
-        </div>
-
-        <div style="color: #fff; position: absolute; left: 175px; top: 300px; font-size: 150px; line-height: 150px; z-index: 100;">STUDIO</div>
-
-      <div style="position: absolute; ">
-        <svg height="500" width="800">
-          <polygon points="0,0 370,0 150,450 0,450" style="fill:#fff" />
-        </svg>
-      </div>
-
-      <div style="position: absolute; ">
-        <svg height="500" width="800">
-          <polygon points="0,0 270,0 50,450 0,450" style="fill:#f69221" />
-        </svg>
-      </div>
-
-      <div style="position: absolute; top: 20px; color: white; left: 120px; font-size: 30px; font-style: italic;">FIND OUT</div>
-      <div style="position: absolute; top: 50px; color: white; left: 130px; font-size: 30px; font-style: italic;">MORE</div>
-
-  </div>
-
 </div>
 
 
 
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+
+
+
 </body>
 </html>
