@@ -1,0 +1,292 @@
+%!Adobe-FontList 1.16
+%Locale:0x1c09
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:ScoutCond-Black
+FamilyName:ScoutCond
+StyleName:Black
+FullName:ScoutCond Black
+MenuName:ScoutCond Black
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\work_clients\contentBar\Font\ScoutCond-Black.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:21096
+FileModTime:1328534692
+WeightClass:900
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,4,ScoutCond Black
+NameArray:0,Win,1,ScoutCond Black
+NameArray:0,Win,16,ScoutCond
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:ScoutCond-BlackItalic
+FamilyName:ScoutCond
+StyleName:BlackItalic
+FullName:ScoutCond BlackItalic
+MenuName:ScoutCond BlackItalic
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\work_clients\contentBar\Font\ScoutCond-BlackItalic.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:21552
+FileModTime:1328534692
+WeightClass:900
+WidthClass:5
+AngleClass:1
+NameArray:0,Mac,4,ScoutCond BlackItalic
+NameArray:0,Win,1,ScoutCond BlackItalic
+NameArray:0,Win,16,ScoutCond
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:ScoutCond-Bold
+FamilyName:ScoutCond
+StyleName:Bold
+FullName:ScoutCond Bold
+MenuName:ScoutCond Bold
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\work_clients\contentBar\Font\ScoutCond-Bold.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:22560
+FileModTime:1328534692
+WeightClass:700
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,4,ScoutCond Bold
+NameArray:0,Win,1,ScoutCond Bold
+NameArray:0,Win,16,ScoutCond
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:ScoutCond-BoldItalic
+FamilyName:ScoutCond
+StyleName:BoldItalic
+FullName:ScoutCond BoldItalic
+MenuName:ScoutCond BoldItalic
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\work_clients\contentBar\Font\ScoutCond-BoldItalic.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:23628
+FileModTime:1328534692
+WeightClass:700
+WidthClass:5
+AngleClass:1
+NameArray:0,Mac,4,ScoutCond BoldItalic
+NameArray:0,Win,1,ScoutCond BoldItalic
+NameArray:0,Win,16,ScoutCond
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:ScoutCond-ExtraLight
+FamilyName:ScoutCond
+StyleName:ExtraLight
+FullName:ScoutCond ExtraLight
+MenuName:ScoutCond ExtraLight
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\work_clients\contentBar\Font\ScoutCond-ExtraLight.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:21232
+FileModTime:1328534692
+WeightClass:200
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,4,ScoutCond ExtraLight
+NameArray:0,Win,1,ScoutCond ExtraLight
+NameArray:0,Win,16,ScoutCond
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:ScoutCond-ExtraLightItalic
+FamilyName:ScoutCond
+StyleName:ExtraLightItalic
+FullName:ScoutCond ExtraLightItalic
+MenuName:ScoutCond ExtraLightItalic
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\work_clients\contentBar\Font\ScoutCond-ExtraLightItal.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:22344
+FileModTime:1328534692
+WeightClass:200
+WidthClass:5
+AngleClass:1
+NameArray:0,Mac,4,ScoutCond ExtraLightItalic
+NameArray:0,Win,1,ScoutCond ExtraLightItalic
+NameArray:0,Win,16,ScoutCond
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:ScoutCond-Light
+FamilyName:ScoutCond
+StyleName:Light
+FullName:ScoutCond Light
+MenuName:ScoutCond Light
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\work_clients\contentBar\Font\ScoutCond-Light.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:20908
+FileModTime:1328534692
+WeightClass:300
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,4,ScoutCond Light
+NameArray:0,Win,1,ScoutCond Light
+NameArray:0,Win,16,ScoutCond
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:ScoutCond-LightItalic
+FamilyName:ScoutCond
+StyleName:LightItalic
+FullName:ScoutCond LightItalic
+MenuName:ScoutCond LightItalic
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\work_clients\contentBar\Font\ScoutCond-LightItalic.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:21424
+FileModTime:1328534692
+WeightClass:300
+WidthClass:5
+AngleClass:1
+NameArray:0,Mac,4,ScoutCond LightItalic
+NameArray:0,Win,1,ScoutCond LightItalic
+NameArray:0,Win,16,ScoutCond
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:ScoutCond-Regular
+FamilyName:ScoutCond
+StyleName:Regular
+FullName:ScoutCond
+MenuName:ScoutCond Regular
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\work_clients\contentBar\Font\ScoutCond-Regular.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:22244
+FileModTime:1328534692
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,18,ScoutCond Regular
+NameArray:0,Mac,4,ScoutCond
+NameArray:0,Win,1,ScoutCond Regular
+NameArray:0,Win,16,ScoutCond
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:ScoutCond-RegularItalic
+FamilyName:ScoutCond
+StyleName:RegularItalic
+FullName:ScoutCond RegularItalic
+MenuName:ScoutCond RegularItalic
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\work_clients\contentBar\Font\ScoutCond-RegularItalic.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:23516
+FileModTime:1328534692
+WeightClass:400
+WidthClass:5
+AngleClass:1
+NameArray:0,Mac,4,ScoutCond RegularItalic
+NameArray:0,Win,1,ScoutCond RegularItalic
+NameArray:0,Win,16,ScoutCond
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:ScoutCond-Thin
+FamilyName:ScoutCond
+StyleName:Thin
+FullName:ScoutCond Thin
+MenuName:ScoutCond Thin
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\work_clients\contentBar\Font\ScoutCond-Thin.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:20420
+FileModTime:1328534692
+WeightClass:100
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,4,ScoutCond Thin
+NameArray:0,Win,1,ScoutCond Thin
+NameArray:0,Win,16,ScoutCond
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:ScoutCond-ThinItalic
+FamilyName:ScoutCond
+StyleName:ThinItalic
+FullName:ScoutCond ThinItalic
+MenuName:ScoutCond ThinItalic
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\work_clients\contentBar\Font\ScoutCond-ThinItalic.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:21152
+FileModTime:1328534692
+WeightClass:100
+WidthClass:5
+AngleClass:1
+NameArray:0,Mac,4,ScoutCond ThinItalic
+NameArray:0,Win,1,ScoutCond ThinItalic
+NameArray:0,Win,16,ScoutCond
+%EndFont
+
