@@ -123,26 +123,30 @@
 
         //CONCEPTS VIDEO FRAME SCALE
 
+        
         if ( $(window).width() >= 1245) 
         {
+          $("#rightbox").css("margin-top", "0px")
           $("#leftbox").css("width", "50%")
           $("#rightbox").css("width", "50%")
           //DESKTOP
           $("#rightbox").height( $("#leftbox").height() )
 
           $("#rightboxvideo").height( $("#rightbox").height() )
-          $("#rightboxvideo").width( $("#rightbox").width() )
+          $("#rightboxvideo").width( "100%" )
 
-          console.log( $("#rightboxvideo").width() )
+ 
 
           $("#leftbox").height( $("#rightboxvideo").width()/640 * 360 )
           $("#rightbox").height( $("#rightboxvideo").width()/640 * 360 )
           //width="640" height="360" 
         } else {
           //MOBILE
+          $("#rightbox").css("margin-top", "15px")
           $("#leftbox").css("width", "100%")
           $("#rightbox").css("width", "100%")
-          $("#rightbox").height( $("#rightbox").width()/640 * 360 )
+
+          $("#rightbox").height( Math.round( $("#rightbox").width()/640 * 360 ) )
           $("#rightboxvideo").height("100%")
           $("#rightboxvideo").width("100%")
         }
@@ -536,7 +540,8 @@ a.menulink div:hover { color: #fff; }
 
 
 <!-- MAINPAGE -->
-<div class="segmentholder" style="margin: 100px auto 50px; max-width: 1860px; ">
+<div class="segmentholder" style="margin: 100px auto 50px; max-width: 1860px;  ">
+  <div style="padding: 15px;">
     <div id="leftbox" style="width: 50%; background: #2aaae1; float: left;  ">
 
         <div style="padding: 15px;">
@@ -556,10 +561,12 @@ a.menulink div:hover { color: #fff; }
               fringilla. Fusce vel orci massa. </p>
         </div>
               
-    </div>
+      </div>
 
-    <div id="rightbox" style="width: 50%; float:left; ">
-      <iframe id="rightboxvideo" src="https://player.vimeo.com/video/88135763" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      <div id="rightbox" style="width: 50%; float:left; ">
+        <iframe id="rightboxvideo" src="https://player.vimeo.com/video/88135763"  frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </div>
+
     </div>
 </div>
 
