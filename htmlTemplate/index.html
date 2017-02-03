@@ -58,6 +58,10 @@
       }
     }
 
+    var hidemenu = function () {
+      if (state.menu.visible == true ) { state.menu.toggle(); }
+    }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     var resizeall = function() {
@@ -229,7 +233,7 @@ var segment6off = function () {
       //$("#buttonholder").html(buttonshtml)
 
 var hideall = function (skip) {
-  
+  hidemenu();
   if (skip != 1) { segment1off(); }
   if (skip != 2) { segment2off(); }
   if (skip != 3) { segment3off(); }
@@ -390,7 +394,7 @@ html, body {
 
  
 
-      <div id="graymenu" style="position: absolute; z-index: -100; ">
+      <div id="graymenu" style="position: absolute; z-index: -100; opacity: 0.9;  ">
         <svg height="1350" width="600">
           <polygon points="232,0 594,0 0,1321 0,517" style="fill:#cccccc" />
         </svg>
