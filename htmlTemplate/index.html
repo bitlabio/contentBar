@@ -40,7 +40,8 @@
 
         state.menu.visible = false;
         $( "#menuoff" ).hide();
-        $("#menuholder").css("z-index", -1)
+        $("#menuholder").css("z-index", 0)
+        $("#graymenu").css("z-index", 0)
         $("#menupagename").fadeIn();
       } else {
         
@@ -51,7 +52,8 @@
         state.menu.visible = true;
         $( "#menuoff" ).show();
 
-        $("#menuholder").css("z-index", 1)
+        $("#menuholder").css("z-index", 1000)
+        $("#graymenu").css("z-index", -1)
         $("#menupagename").fadeOut();
       }
     }
@@ -383,12 +385,12 @@ html, body {
 
 <!-- MENU START-->
 
-<div id="menuholder" style="position: fixed; z-index: -1; top: 0px; transform: translate(-20%, -20%) scale(0.6);">
+<div id="menuholder" style="position: fixed;top: 0px; transform: translate(-20%, -20%) scale(0.6);">
   <div id="menu" style="height: 1350px; width: 600px; left: -445px; position: relative; ">
 
  
 
-      <div style="position: absolute; ">
+      <div id="graymenu" style="position: absolute; z-index: -100; ">
         <svg height="1350" width="600">
           <polygon points="232,0 594,0 0,1321 0,517" style="fill:#cccccc" />
         </svg>
@@ -480,7 +482,7 @@ html, body {
           </div>
       </div>        
 
-     <div id="menubutton" style="cursor: pointer; position: absolute; width: 220px; left: 445px; height: 100px;" >
+     <div id="menubutton" style="cursor: pointer; position: absolute; width: 220px; left: 445px; height: 100px; " >
       </div>
 
 </div>
@@ -496,8 +498,8 @@ html, body {
 
 
 <!-- MAINPAGE -->
-<div class="segmentholder" style="margin: 0 auto 50px; max-width: 1860px; ">
-  <div style="margin: 100px 0 0 0; max-width: 1845px; padding: 15px 0 0 15px; z-index: 2000;  ">
+<div class="segmentholder" style="margin: 100px auto 50px; max-width: 1860px; ">
+  <div style="margin: 100px 0 0 0; max-width: 1845px; padding: 15px 0 0 15px;  ">
 
     <!-- SEGMENT START-->
     <div class="segment" >
