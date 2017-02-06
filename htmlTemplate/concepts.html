@@ -67,7 +67,7 @@
 
     var resizeall = function() {
       
-
+    /*
      if ($(window).width() < 4000) {
 
         var scale = ($(window).width()-30) / 600;
@@ -78,6 +78,7 @@
         $(".segment").css("transform", "translate(-"+s+"%, -"+s+"%) scale("+scale+")")
         $(".segment").height(330 * scale)
       }
+      */
 
       console.log( $(window).width() )
 
@@ -140,6 +141,30 @@
           $("#leftbox").height( $("#rightboxvideo").width()/640 * 360 )
           $("#rightbox").height( $("#rightboxvideo").width()/640 * 360 )
           //width="640" height="360" 
+
+          //TOP BOX
+
+        /*var scale = ($(window).width()-30) / 600;
+        if (scale > 1) { scale = 1}
+        var s = 1-scale
+        s = s / 2; 
+        s = Math.round(s * 100);
+        $(".segment").css("transform", "translate(-"+s+"%, -"+s+"%) scale("+scale+")")
+        $(".segment").height(330 * scale)          */
+
+
+        var scale = ($("#rightboxvideo").width()) / 600;
+          var s = 1-scale
+          s = s / 2; 
+          s = Math.round(s * 100) * -1;
+          console.log(s)
+
+        
+        $(".segment").css("transform", "translate(0%, "+s+"%) scale("+scale+")")
+
+        $("#topboxpad").height( $(".segment").height()  )
+
+
         } else {
           //MOBILE
           $("#rightbox").css("margin-top", "15px")
@@ -149,7 +174,28 @@
           $("#rightbox").height( Math.round( $("#rightbox").width()/640 * 360 ) )
           $("#rightboxvideo").height("100%")
           $("#rightboxvideo").width("100%")
+
+          var scale = ($("#rightboxvideo").width()) / 600;
+          var s = 1-scale
+          s = s / 2; 
+          s = Math.round(s * 100);
+          $(".segment").css("transform", "translate(-"+s+"%, -"+s+"%) scale("+scale+")")          
+          $("#topboxpad").height( $(".segment").height()  )
         }
+
+        //GALLERY
+
+        var maxx = $("#gallerythumbholder").width()
+        var thumbsx = 5;
+
+        if ($(window).width() <= 630) { thumbsx = 3}
+        if ( $(window).width() >= 1245) { thumbsx = 5}
+        if ( $(window).width() >= 1860) { thumbsx = 9}
+
+
+        var thumbpixels = (maxx - (15*thumbsx) - 15)/thumbsx
+        $(".gallerythumb").width(thumbpixels)
+        $(".gallerythumb").height(thumbpixels)
 
 
     }
@@ -160,12 +206,14 @@ var segment1on = function () {
   $("#slidepanel1").animate({ left: "0px", }, 300 ); 
   $("#findoutmore1").fadeOut(); 
   $("#paragraph1").fadeIn(); 
+  $("#segTitle").animate({ left: "250px", }, 300, 'swing' ); 
 }
 
 var segment1off = function () {  
   $("#slidepanel1").animate({ left: "-450px", }, 300 ); 
   $("#findoutmore1").fadeIn(); 
   $("#paragraph1").fadeOut(); 
+  $("#segTitle").animate({ left: "325px", }, 300 ); 
 }
 
 
@@ -276,7 +324,7 @@ var hideall = function (skip) {
   
 }
 
-      $("#findbutton1").mousedown( function () { hideall(1); segment1on();  })
+      $("#findbutton1").mousedown( function () { hideall(1); segment1on(); })
       $("#findbutton2").mousedown( function () { hideall(2); segment2on(); })
       $("#findbutton3").mousedown( function () { hideall(3); segment3on(); })
       $("#findbutton4").mousedown( function () { hideall(4); segment4on(); })
@@ -386,8 +434,7 @@ html, body {
 }
 
 .segment {
-  transform: scale(1);
-  float: left;
+
   margin-right: 15px;
   margin-bottom: 15px;
 }
@@ -400,8 +447,8 @@ a.menulink div:hover { color: #fff; }
 
 
 .segmentTitles {
-  position: absolute; top: 195px; left: 20px; font-size: 95px; color: #fff;
-  font-family: 'ScoutBold';
+  position: absolute; top: 35px; left: 325px; font-size: 95px; color: #fff; line-height: 80px;
+  font-family: 'ScoutItalic';
 }
 
 .segmentFindOut {
@@ -535,12 +582,51 @@ a.menulink div:hover { color: #fff; }
 
 
 
+<!-- MAINPAGE -->
+<div class="segmentholder" style="margin: 100px auto 0px; max-width: 1860px; b">
+  <div id="topboxpad" style=" padding: 0 15px 0 15px; ">
+
+    <!-- SEGMENT START-->
+    <div id="topbox" class="segment" style="margin: 0 auto; ">
+    <div  style="width: 600px; height: 330px; background: #333; overflow: hidden; position: relative; margin: 0 auto;">
+
+      <div id="slidepanel1" style="position: relative; top:0px; left: -450px; height: 330px; width: 600px; z-index: 1000;">
+          <svg height="330" width="600" style="position: absolute;">
+           <polygon points="0,0 600,0 450,330 0,330" style="fill:#2aaae1" /></polygon>
+          </svg>
+
+         <div style="position: absolute; top: 30px; left: 30px; width: 500px; z-index: 1001;">
+          <p id="paragraph1" class="mediatext" align="justify" style=" display:none;  color: white; font-weight: 100;">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
+              augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
+              dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
+              amet rhoncus arcu massa sed lectus. Nam fringilla velit in luctus
+              fringilla. Fusce vel orci massa. Nam fringilla velit in luctus
+              fringilla. Fusce vel orci massa. </p>
+          </div>          
+         
+          <div id="findoutmore1" style="position: relative; z-index: 1002;">
+            <div class="segmentFindOut" >FIND OUT</div>
+            <div class="segmentMore" >MORE</div>          
+            <div id="findbutton1" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
+          </div>
+        
+      </div>
+
+      <div id="segTitle" class="segmentTitles" style="text-align: right; z-index: 999;">LET'S<br>TALK<br>DIGITAL</div>
+
+    </div>
+    </div>
+    <!-- SEGMENT END -->
+      <div style="clear: both;"></div>
+    </div>
+</div>    
 
 
 
 
 <!-- MAINPAGE -->
-<div class="segmentholder" style="margin: 100px auto 50px; max-width: 1860px;  ">
+<div class="segmentholder" style="margin: 0px auto 0px; max-width: 1860px;  ">
   <div style="padding: 15px;">
     <div id="leftbox" style="width: 50%; background: #2aaae1; float: left;  ">
 
@@ -568,9 +654,77 @@ a.menulink div:hover { color: #fff; }
       </div>
 
     </div>
+
+    <div style="clear: both;"></div>
 </div>
 
+<!-- gallery START -->
+ 
+ <div style="background: background: #f00; ">
+    <div class="segmentholder" style="margin: 0px auto 50px; max-width: 1860px; ">
+     <div id="gallerythumbholder" style="margin: 15px; background: #2aaae1;">
 
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+
+
+       <div style="clear: both; margin-bottom: 15px;"></div>
+     </div>
+    </div>
+ </div>
+
+<!-- gallery END -->
 
 <div style="width: 100%; height: 100px; clear: both;">
 </div>

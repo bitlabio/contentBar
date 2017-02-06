@@ -24,6 +24,7 @@
   <link rel="icon" type="image/png" href="images/favicon.png">
 
   <script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="libs.js"></script>
   <script type="text/javascript">
 
     var state = {}
@@ -66,7 +67,7 @@
 
     var resizeall = function() {
       
-
+    /*
      if ($(window).width() < 4000) {
 
         var scale = ($(window).width()-30) / 600;
@@ -77,6 +78,7 @@
         $(".segment").css("transform", "translate(-"+s+"%, -"+s+"%) scale("+scale+")")
         $(".segment").height(330 * scale)
       }
+      */
 
       console.log( $(window).width() )
 
@@ -120,6 +122,82 @@
         }
 
 
+        //CONCEPTS VIDEO FRAME SCALE
+
+        
+        if ( $(window).width() >= 1245) 
+        {
+          $("#rightbox").css("margin-top", "0px")
+          $("#leftbox").css("width", "50%")
+          $("#rightbox").css("width", "50%")
+          //DESKTOP
+          $("#rightbox").height( $("#leftbox").height() )
+
+          $("#rightboxvideo").height( $("#rightbox").height() )
+          $("#rightboxvideo").width( "100%" )
+
+ 
+
+          $("#leftbox").height( $("#rightboxvideo").width()/640 * 360 )
+          $("#rightbox").height( $("#rightboxvideo").width()/640 * 360 )
+          //width="640" height="360" 
+
+          //TOP BOX
+
+        /*var scale = ($(window).width()-30) / 600;
+        if (scale > 1) { scale = 1}
+        var s = 1-scale
+        s = s / 2; 
+        s = Math.round(s * 100);
+        $(".segment").css("transform", "translate(-"+s+"%, -"+s+"%) scale("+scale+")")
+        $(".segment").height(330 * scale)          */
+
+
+        var scale = ($("#rightboxvideo").width()) / 600;
+          var s = 1-scale
+          s = s / 2; 
+          s = Math.round(s * 100) * -1;
+          console.log(s)
+
+        
+        $(".segment").css("transform", "translate(0%, "+s+"%) scale("+scale+")")
+
+        $("#topboxpad").height( $(".segment").height()  )
+
+
+        } else {
+          //MOBILE
+          $("#rightbox").css("margin-top", "15px")
+          $("#leftbox").css("width", "100%")
+          $("#rightbox").css("width", "100%")
+
+          $("#rightbox").height( Math.round( $("#rightbox").width()/640 * 360 ) )
+          $("#rightboxvideo").height("100%")
+          $("#rightboxvideo").width("100%")
+
+          var scale = ($("#rightboxvideo").width()) / 600;
+          var s = 1-scale
+          s = s / 2; 
+          s = Math.round(s * 100);
+          $(".segment").css("transform", "translate(-"+s+"%, -"+s+"%) scale("+scale+")")          
+          $("#topboxpad").height( $(".segment").height()  )
+        }
+
+        //GALLERY
+
+        var maxx = $("#gallerythumbholder").width()
+        var thumbsx = 5;
+
+        if ($(window).width() <= 630) { thumbsx = 3}
+        if ( $(window).width() >= 1245) { thumbsx = 5}
+        if ( $(window).width() >= 1860) { thumbsx = 9}
+
+
+        var thumbpixels = (maxx - (15*thumbsx) - 15)/thumbsx
+        $(".gallerythumb").width(thumbpixels)
+        $(".gallerythumb").height(thumbpixels)
+
+
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -128,12 +206,14 @@ var segment1on = function () {
   $("#slidepanel1").animate({ left: "0px", }, 300 ); 
   $("#findoutmore1").fadeOut(); 
   $("#paragraph1").fadeIn(); 
+  $("#segTitle").animate({ left: "-100", }, 300, 'swing' ); 
 }
 
 var segment1off = function () {  
   $("#slidepanel1").animate({ left: "-450px", }, 300 ); 
   $("#findoutmore1").fadeIn(); 
   $("#paragraph1").fadeOut(); 
+  $("#segTitle").animate({ left: "0", }, 300 ); 
 }
 
 
@@ -244,7 +324,7 @@ var hideall = function (skip) {
   
 }
 
-      $("#findbutton1").mousedown( function () { hideall(1); segment1on();  })
+      $("#findbutton1").mousedown( function () { hideall(1); segment1on(); })
       $("#findbutton2").mousedown( function () { hideall(2); segment2on(); })
       $("#findbutton3").mousedown( function () { hideall(3); segment3on(); })
       $("#findbutton4").mousedown( function () { hideall(4); segment4on(); })
@@ -271,6 +351,11 @@ var hideall = function (skip) {
 
 
 
+      resizeall();
+      
+      waitForWebfonts(['ScoutItalic', 'ScoutBold', 'ScoutThin'], function() {
+        resizeall();
+      });
 
     });
 
@@ -349,8 +434,7 @@ html, body {
 }
 
 .segment {
-  transform: scale(1);
-  float: left;
+
   margin-right: 15px;
   margin-bottom: 15px;
 }
@@ -363,8 +447,8 @@ a.menulink div:hover { color: #fff; }
 
 
 .segmentTitles {
-  position: absolute; top: 195px; left: 20px; font-size: 95px; color: #fff;
-  font-family: 'ScoutBold';
+  position: absolute; top: 35px; left: 0px;  font-size: 95px; color: #fff; line-height: 80px;
+  font-family: 'ScoutItalic';
 }
 
 .segmentFindOut {
@@ -403,14 +487,14 @@ a.menulink div:hover { color: #fff; }
 
       <div style="position: absolute; left: 527px; top: 15px; ">
         <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#fff" />
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#eb416d" />
             </svg>
       </div>
            
 
       <div class="boldf" style="position: absolute; top: 17px; left: 460px; font-size: 28px; font-family: 'ScoutItalic'; ">CONTENT</div>
       <div style="position: absolute; top: 38px; left: 490px; font-size: 28px; font-family: 'ScoutItalic'; ">BAR</div>
-      <div id="menupagename" style="position: absolute; top: 7px; left: 550px; font-size: 50px; font-family: 'ScoutBold'; ">HOME</div>
+      <div id="menupagename" style="position: absolute; top: 7px; left: 550px; font-size: 50px; font-family: 'ScoutBold'; ">CLIPAISLE</div>
 
       
       <!-- MENU CONCEPTS -->
@@ -418,22 +502,24 @@ a.menulink div:hover { color: #fff; }
           <div style="position: relative;">
             
             <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#2aaae1" />
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#fff" />
             </svg>
 
-            <a class="menulink" href="concepts.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'; ">CONCEPTS</div></a>
+            <a class="menulink" href="index.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'; ">HOME</div></a>
           </div>
       </div>       
+
+   
 
       <!-- MENU AUDIENCE -->
       <div class="menuitem" style="position: absolute; z-index: 100; top: 170px; left: 153px; width: 300px; height: 64px;">
           <div style="position: relative;">
             
             <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#c1272d" />
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#2aaae1" />
             </svg>
 
-            <a class="menulink" href="audience.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">AUDIENCE</div></a>
+            <a class="menulink" href="concepts.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">CONCEPTS</div></a>
           </div>
       </div>  
 
@@ -443,11 +529,11 @@ a.menulink div:hover { color: #fff; }
           <div style="position: relative;">
             
             <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#8bc541" />
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#c1272d" />
             </svg>
 
 
-            <a class="menulink" href="photobooth.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">PHOTOBOOTH</div></a>
+            <a class="menulink" href="audience.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">AUDIENCE</div></a>
           </div>
       </div>  
 
@@ -456,10 +542,10 @@ a.menulink div:hover { color: #fff; }
           <div style="position: relative;">
             
             <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#eb416d" />
+              <polygon points="29,0 45,0 17,63 0,63" style="fill:#8bc541" />
             </svg>
 
-            <a class="menulink" href="clipaisle.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">CLIPAISLE</div></a>
+            <a class="menulink" href="photobooth.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">PHOTOBOOTH</div></a>
           </div>
       </div>  
 
@@ -498,24 +584,20 @@ a.menulink div:hover { color: #fff; }
 
 
 
-
-
-
-
 <!-- MAINPAGE -->
-<div class="segmentholder" style="margin: 100px auto 50px; max-width: 1860px; ">
-  <div style="margin: 100px 0 0 0; max-width: 1845px; padding: 15px 0 0 15px;  ">
+<div class="segmentholder" style="margin: 100px auto 0px; max-width: 1860px; b">
+  <div id="topboxpad" style=" padding: 0 15px 0 15px; ">
 
     <!-- SEGMENT START-->
-    <div class="segment" >
-    <div  style="width: 600px; height: 330px; background: #333; overflow: hidden; position: relative;">
+    <div id="topbox" class="segment" style="margin: 0 auto; ">
+    <div  style="width: 600px; height: 330px; background: #333; overflow: hidden; position: relative; margin: 0 auto;">
 
-      <div id="slidepanel1" style="position: relative; top:0px; left: -450px; height: 330px; width: 600px;">
+      <div id="slidepanel1" style="position: relative; top:0px; left: -450px; height: 330px; width: 600px; z-index: 1000;">
           <svg height="330" width="600" style="position: absolute;">
-           <polygon points="0,0 600,0 450,330 0,330" style="fill:#2aaae1" />
+           <polygon points="0,0 600,0 450,330 0,330" style="fill:#eb416d" /></polygon>
           </svg>
 
-         <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
+         <div style="position: absolute; top: 30px; left: 30px; width: 500px; z-index: 1001;">
           <p id="paragraph1" class="mediatext" align="justify" style=" display:none;  color: white; font-weight: 100;">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
               augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
@@ -525,7 +607,7 @@ a.menulink div:hover { color: #fff; }
               fringilla. Fusce vel orci massa. </p>
           </div>          
          
-          <div id="findoutmore1" style="position: relative;">
+          <div id="findoutmore1" style="position: relative; z-index: 1002;">
             <div class="segmentFindOut" >FIND OUT</div>
             <div class="segmentMore" >MORE</div>          
             <div id="findbutton1" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
@@ -533,184 +615,121 @@ a.menulink div:hover { color: #fff; }
         
       </div>
 
-      <a href="concepts.html"><div class="segmentTitles" >CONCEPTS</div></a>
+      <div id="segTitle" class="segmentTitles" style="text-align: right; z-index: 999; width: 550px;">PERFECT<br>LIVE MUSIC<br>EXPERIENCE</div>
 
     </div>
     </div>
     <!-- SEGMENT END -->
+      <div style="clear: both;"></div>
+    </div>
+</div>    
 
-    <!-- SEGMENT START-->
-    <div class="segment" >
-    <div  style="width: 600px; height: 330px; background: #333; overflow: hidden; position: relative;">
 
-      <div id="slidepanel2" style="position: relative; top:0px; left: -450px; height: 330px; width: 600px;">
-          <svg height="330" width="600" style="position: absolute;">
-           <polygon points="0,0 600,0 450,330 0,330" style="fill:#c1272d" />
-          </svg>
 
-         <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
-          <p id="paragraph2" class="mediatext" align="justify" style=" display:none; color: white; font-weight: 100;">
+
+<!-- MAINPAGE -->
+<div class="segmentholder" style="margin: 0px auto 0px; max-width: 1860px;  ">
+  <div style="padding: 15px;">
+    <div id="leftbox" style="width: 50%; background: #eb416d; float: left;  ">
+
+        <div style="padding: 15px;">
+
+             <h2 style="position: relative; top: -10px; color: #fff; font-family: 'ScoutBold'; letter-spacing: 0.01em;">THE FUTURE OF LIVE MUSIC</h2>
+
+                <p align="justify" style=" font-family: 'ScoutThin' ; font-size: 30px; line-height: 30px; color: white; font-weight: 100;">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
+              augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
+              dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
+              amet rhoncus arcu massa sed lectus. Nam fringilla velit in luctus
+              fringilla. Fusce vel orci massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
               augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
               dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
               amet rhoncus arcu massa sed lectus. Nam fringilla velit in luctus
               fringilla. Fusce vel orci massa. Nam fringilla velit in luctus
               fringilla. Fusce vel orci massa. </p>
-          </div>          
-         
-          <div id="findoutmore2" style="position: relative;">
-            <div class="segmentFindOut" >FIND OUT</div>
-            <div class="segmentMore" >MORE</div>          
-            <div id="findbutton2" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
-          </div>
-        
+        </div>
+              
       </div>
 
-      <a href="audience.html"><div class="segmentTitles" >AUDIENCE</div></a>
-
-    </div>
-    </div>
-    <!-- SEGMENT END -->
-
-    <!-- SEGMENT START-->
-    <div class="segment" >
-    <div  style="width: 600px; height: 330px; background: #333; overflow: hidden; position: relative;">
-
-      <div id="slidepanel3" style="position: relative; top:0px; left: -450px; height: 330px; width: 600px;">
-          <svg height="330" width="600" style="position: absolute;">
-           <polygon points="0,0 600,0 450,330 0,330" style="fill:#8bc541" />
-          </svg>
-
-         <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
-          <p id="paragraph3" class="mediatext" align="justify" style=" display:none; color: white; font-weight: 100;">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
-              augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
-              dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
-              amet rhoncus arcu massa sed lectus. Nam fringilla velit in luctus
-              fringilla. Fusce vel orci massa. Nam fringilla velit in luctus
-              fringilla. Fusce vel orci massa. </p>
-          </div>          
-         
-          <div id="findoutmore3" style="position: relative;">
-            <div class="segmentFindOut" >FIND OUT</div>
-            <div class="segmentMore" >MORE</div>          
-            <div id="findbutton3" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
-          </div>
-        
+      <div id="rightbox" style="width: 50%; float:left; ">
+        <iframe id="rightboxvideo" src="https://player.vimeo.com/video/88135763"  frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
       </div>
 
-      <a href="photobooth.html"><div class="segmentTitles" >PHOTOBOOTH</div></a>
-
     </div>
-    </div>
-    <!-- SEGMENT END -->
 
-    <!-- SEGMENT START-->
-    <div class="segment" >
-    <div  style="width: 600px; height: 330px; background: #333; overflow: hidden; position: relative;">
-
-      <div id="slidepanel4" style="position: relative; top:0px; left: -450px; height: 330px; width: 600px;">
-          <svg height="330" width="600" style="position: absolute;">
-           <polygon points="0,0 600,0 450,330 0,330" style="fill:#eb416d" />
-          </svg>
-
-         <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
-          <p id="paragraph4" class="mediatext" align="justify" style=" display:none; color: white; font-weight: 100;">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
-              augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
-              dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
-              amet rhoncus arcu massa sed lectus. Nam fringilla velit in luctus
-              fringilla. Fusce vel orci massa. Nam fringilla velit in luctus
-              fringilla. Fusce vel orci massa. </p>
-          </div>          
-         
-          <div id="findoutmore4" style="position: relative;">
-            <div class="segmentFindOut" >FIND OUT</div>
-            <div class="segmentMore" >MORE</div>          
-            <div id="findbutton4" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
-          </div>
-        
-      </div>
-
-      <a href="clipaisle.html"><div class="segmentTitles" >CLIPAISLE</div></a>
-
-    </div>
-    </div>
-    <!-- SEGMENT END -->
-
-    <!-- SEGMENT START-->
-    <div class="segment" >
-    <div  style="width: 600px; height: 330px; background: #333; overflow: hidden; position: relative;">
-
-      <div id="slidepanel5" style="position: relative; top:0px; left: -450px; height: 330px; width: 600px;">
-          <svg height="330" width="600" style="position: absolute;">
-           <polygon points="0,0 600,0 450,330 0,330" style="fill:#f69221" />
-          </svg>
-
-         <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
-          <p id="paragraph5" class="mediatext" align="justify" style=" display:none; color: white; font-weight: 100;">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
-              augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
-              dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
-              amet rhoncus arcu massa sed lectus. Nam fringilla velit in luctus
-              fringilla. Fusce vel orci massa. Nam fringilla velit in luctus
-              fringilla. Fusce vel orci massa. </p>
-          </div>          
-         
-          <div id="findoutmore5" style="position: relative;">
-            <div class="segmentFindOut" >FIND OUT</div>
-            <div class="segmentMore" >MORE</div>          
-            <div id="findbutton5" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
-          </div>
-        
-      </div>
-
-      <a href="studio.html"><div class="segmentTitles" >STUDIO</div></a>
-
-    </div>
-    </div>
-    <!-- SEGMENT END -->
-
-    <!-- SEGMENT START-->
-    <div class="segment" >
-    <div  style="width: 600px; height: 330px; background: #666666; overflow: hidden; position: relative;">
-
-      <div id="slidepanel6" style="position: relative; top:0px; left: -450px; height: 330px; width: 600px;">
-          <svg height="330" width="600" style="position: absolute;">
-           <polygon points="0,0 600,0 450,330 0,330" style="fill:#333333" />
-          </svg>
-
-         <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
-          <p id="paragraph6" class="mediatext" align="justify" style=" display:none; color: white; font-weight: 100;">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
-              augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
-              dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
-              amet rhoncus arcu massa sed lectus. Nam fringilla velit in luctus
-              fringilla. Fusce vel orci massa. Nam fringilla velit in luctus
-              fringilla. Fusce vel orci massa. </p>
-          </div>          
-         
-          <div id="findoutmore6" style="position: relative;">
-            <div class="segmentFindOut" >FIND OUT</div>
-            <div class="segmentMore" >MORE</div>          
-            <div id="findbutton6" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
-          </div>
-        
-      </div>
-
-      <a href="contact.html"><div class="segmentTitles" >CONTACT</div></a>
-
-    </div>
-    </div>
-    <!-- SEGMENT END -->                
-
-    <div style="clear:both;"></div>
-
+    <div style="clear: both;"></div>
 </div>
 
+<!-- gallery START -->
+ 
+ <div style="background: background: #f00; ">
+    <div class="segmentholder" style="margin: 0px auto 50px; max-width: 1860px; ">
+     <div id="gallerythumbholder" style="margin: 15px; background: #eb416d;">
+
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+
+
+       <div style="clear: both; margin-bottom: 15px;"></div>
+     </div>
+    </div>
+ </div>
+
+<!-- gallery END -->
+
+<div style="width: 100%; height: 100px; clear: both;">
 </div>
-
-
 
 <div id="footer0" style="width: 100%; height: 50px; background: #333; position: fixed; bottom: 0px; border-top: 15px solid #fff;">
  <div id="footer1" class="segmentholder" style="height: 50px; margin: 0 auto;    ">
