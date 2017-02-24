@@ -210,9 +210,78 @@ var segment6off = function () {
 
 
 
+var segment7on = function () {  
+  $("#slidepanel7").animate({ left: "0px", }, 300 ); 
+  $("#findoutmore7").fadeOut(); 
+  $("#paragraph7").fadeIn(); 
+}
+
+var segment7off = function () {  
+  $("#slidepanel7").animate({ left: "-450px", }, 300 ); 
+  $("#findoutmore7").fadeIn(); 
+  $("#paragraph7").fadeOut(); 
+}
+
+
+
     $( document ).ready(function() {
       resizeall();
       console.log( "ready!" );
+
+      /* ===================================================================================================== */
+      //generate the menu
+
+      var menu = []
+      menu.push({text:"home", link:"index.html", color: "#ffffff"})
+      menu.push({text:"concepts", link:"concepts.html", color: "#2aaae1"})
+      menu.push({text:"audience", link:"audience.html", color: "#c1272d"})
+      menu.push({text:"photobooth", link:"photobooth.html", color: "#8bc541"})
+      menu.push({text:"clipaisle", link:"clipaisle.html", color: "#eb416d"})
+      menu.push({text:"studios", link:"studios.html", color: "#f69221"})
+      menu.push({text:"work", link:"work.html", color: "#8747bf"})
+      menu.push({text:"contact", link:"contact.html", color: "#333333"})
+
+      var menuitemshtml = '';
+      var scale = 0.90;
+
+      var menufontsize = 58 * scale;
+      var menufonttop = -15 * scale;
+      var menufontleft = 25 * scale;
+      var left = 220; //starts at this position from the left
+      var shiftleft = -32 * scale; //each menu item is this distance left from the previous
+
+      var top = 20; //starts at this height
+      var shifttop = 70 * scale; //each menu item is this distance down from the previous
+      
+      var chevrondata = [29,0,45,0,17,63,0,63];
+      function chevron(scale) { 
+        var write = ''
+        for (var d in chevrondata) {
+          write += chevrondata[d]* scale
+          if ((d % 2 == 0)&&(d != chevrondata.length-1)) { write += ','} else { write += ' '}
+        }
+        //return '29,0 45,0 17,63 0,63' 
+        return write
+      }
+      for (var i in menu) {
+        menuitemshtml += `<div class="menuitem" style="position: absolute; z-index: 100; top: `+top+`px; left: `+left+`px; width: 300px; height: 64px;">
+          <div style="position: relative;">
+            
+            <svg height="64" width="45" style="position: absolute;">
+              <polygon points="`+chevron(scale)+`" style="fill:`+menu[i].color+`" />
+            </svg>
+
+            <a class="menulink" href="`+menu[i].link+`"><div style="position: absolute; top: `+menufonttop+`px; left: `+menufontleft+`px; font-size: `+menufontsize+`px; font-family: 'ScoutBold'; text-transform: uppercase;">`+menu[i].text+`</div></a>
+          </div>
+        </div>`;  
+
+        left += shiftleft;
+        top += shifttop;
+      }
+      $("#menuItems").html(menuitemshtml)
+
+      // done building the menu
+      /* ===================================================================================================== */
 
       console.log($(window).width())
 
@@ -240,16 +309,18 @@ var hideall = function (skip) {
   if (skip != 4) { segment4off(); }
   if (skip != 5) { segment5off(); }
   if (skip != 6) { segment6off(); }
+  if (skip != 7) { segment7off(); }
   
   
 }
 
-      $("#findbutton1").mousedown( function () { hideall(1); segment1on();  })
-      $("#findbutton2").mousedown( function () { hideall(2); segment2on(); })
-      $("#findbutton3").mousedown( function () { hideall(3); segment3on(); })
-      $("#findbutton4").mousedown( function () { hideall(4); segment4on(); })
-      $("#findbutton5").mousedown( function () { hideall(5); segment5on(); })
-      $("#findbutton6").mousedown( function () { hideall(6); segment6on(); })
+      $("#findbutton1").mouseup( function () { hideall(1); segment1on();  })
+      $("#findbutton2").mouseup( function () { hideall(2); segment2on(); })
+      $("#findbutton3").mouseup( function () { hideall(3); segment3on(); })
+      $("#findbutton4").mouseup( function () { hideall(4); segment4on(); })
+      $("#findbutton5").mouseup( function () { hideall(5); segment5on(); })
+      $("#findbutton6").mouseup( function () { hideall(6); segment6on(); })
+      $("#findbutton7").mouseup( function () { hideall(7); segment7on(); })
 
 
 
@@ -412,8 +483,10 @@ a.menulink div:hover { color: #fff; }
       <div style="position: absolute; top: 38px; left: 490px; font-size: 28px; font-family: 'ScoutItalic'; ">BAR</div>
       <div id="menupagename" style="position: absolute; top: 7px; left: 550px; font-size: 50px; font-family: 'ScoutBold'; ">HOME</div>
 
+      <!-- MENU Items -->
+      <div id="menuItems">
       
-      <!-- MENU CONCEPTS -->
+      <!-- MENU CONCEPTS 
       <div class="menuitem" style="position: absolute; z-index: 100; top: 100px; left: 185px; width: 300px; height: 64px;">
           <div style="position: relative;">
             
@@ -425,7 +498,7 @@ a.menulink div:hover { color: #fff; }
           </div>
       </div>       
 
-      <!-- MENU AUDIENCE -->
+  
       <div class="menuitem" style="position: absolute; z-index: 100; top: 170px; left: 153px; width: 300px; height: 64px;">
           <div style="position: relative;">
             
@@ -438,7 +511,6 @@ a.menulink div:hover { color: #fff; }
       </div>  
 
 
-      <!-- MENU PHOTOBOOTH -->
       <div class="menuitem" style="position: absolute; z-index: 100; top: 240px; left: 122px; width: 300px; height: 64px;">
           <div style="position: relative;">
             
@@ -451,7 +523,7 @@ a.menulink div:hover { color: #fff; }
           </div>
       </div>  
 
-      <!-- MENU CLIPAISLE -->
+    
       <div class="menuitem" style="position: absolute; z-index: 100; top: 310px; left: 91px; width: 300px; height: 64px;">
           <div style="position: relative;">
             
@@ -463,7 +535,7 @@ a.menulink div:hover { color: #fff; }
           </div>
       </div>  
 
-      <!-- MENU STUDIO -->
+ 
       <div class="menuitem" style="position: absolute; z-index: 100; top: 384px; left: 59px; width: 300px; height: 64px;">
           <div style="position: relative;">
             
@@ -475,7 +547,6 @@ a.menulink div:hover { color: #fff; }
           </div>
       </div>  
 
-      <!-- MENU CONTACT US -->
       <div class="menuitem" style="position: absolute; z-index: 100; top: 456px; left: 29px; width: 300px; height: 64px;">
           <div style="position: relative;">
             
@@ -485,7 +556,9 @@ a.menulink div:hover { color: #fff; }
 
             <a class="menulink" href="contact.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">CONTACT</div></a>
           </div>
-      </div>        
+      </div>   
+      -->
+    </div>     
 
      <div id="menubutton" style="cursor: pointer; position: absolute; width: 220px; left: 445px; height: 100px; " >
       </div>
@@ -671,13 +744,14 @@ a.menulink div:hover { color: #fff; }
     </div>
     <!-- SEGMENT END -->
 
+
     <!-- SEGMENT START-->
     <div class="segment" >
-    <div  style="width: 600px; height: 330px; background: #666666; overflow: hidden; position: relative;">
+    <div  style="width: 600px; height: 330px; background: #333; overflow: hidden; position: relative;">
 
       <div id="slidepanel6" style="position: relative; top:0px; left: -450px; height: 330px; width: 600px;">
           <svg height="330" width="600" style="position: absolute;">
-           <polygon points="0,0 600,0 450,330 0,330" style="fill:#333333" />
+           <polygon points="0,0 600,0 450,330 0,330" style="fill:#8747bf" />
           </svg>
 
          <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
@@ -698,11 +772,45 @@ a.menulink div:hover { color: #fff; }
         
       </div>
 
+      <a href="work.html"><div class="segmentTitles" >WORK</div></a>
+
+    </div>
+    </div>
+    <!-- SEGMENT END -->             
+
+
+<!-- SEGMENT START-->
+    <div class="segment" >
+    <div  style="width: 600px; height: 330px; background: #666666; overflow: hidden; position: relative;">
+
+      <div id="slidepanel7" style="position: relative; top:0px; left: -450px; height: 330px; width: 600px;">
+          <svg height="330" width="600" style="position: absolute;">
+           <polygon points="0,0 600,0 450,330 0,330" style="fill:#333333" />
+          </svg>
+
+         <div style="position: absolute; top: 30px; left: 30px; width: 500px;">
+          <p id="paragraph7" class="mediatext" align="justify" style=" display:none; color: white; font-weight: 100;">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rutrum
+              augue justo, a cursus mauris mattis at. Integer in augue orci. Aliquam
+              dapibus, elit eu pretium ullamcorper, diam lacus commodo augue, sit
+              amet rhoncus arcu massa sed lectus. Nam fringilla velit in luctus
+              fringilla. Fusce vel orci massa. Nam fringilla velit in luctus
+              fringilla. Fusce vel orci massa. </p>
+          </div>          
+         
+          <div id="findoutmore7" style="position: relative;">
+            <div class="segmentFindOut" >FIND OUT</div>
+            <div class="segmentMore" >MORE</div>          
+            <div id="findbutton7" class="findbutton" style="position: absolute; top: 10px; left: 460px; height: 70px; width: 120px; "></div>
+          </div>
+        
+      </div>
+
       <a href="contact.html"><div class="segmentTitles" >CONTACT</div></a>
 
     </div>
     </div>
-    <!-- SEGMENT END -->                
+    <!-- SEGMENT END -->       
 
     <div style="clear:both;"></div>
 
