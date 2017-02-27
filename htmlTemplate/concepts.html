@@ -18,26 +18,35 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
-
+  <link href="css/lightbox.css" rel="stylesheet">
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/favicon.png">
 
   <script type="text/javascript" src="jquery-3.1.1.min.js"></script>
-  <script type="text/javascript" src="libs.js"></script>
+  <script type="text/javascript" src="contentbar.js"></script>
+  <script src="js/lightbox.js"></script>
+
+
   <script type="text/javascript">
 
     var state = {}
     state.menu = {}
     state.menu.visible = false;
+    state.menu.scale = 0.8;
 
     state.menu.toggle = function() {
       console.log("toggle menu");
+
+
 
       if (state.menu.visible) {
         $("#menu").animate({ 
           left: "-445px",
         }, 300 );
+
+        $( "#menuactivate" ).css("display" , "block")
+        $("#menuholder").css("pointer-events", "none");
 
         state.menu.visible = false;
         $( "#menuoff" ).hide();
@@ -49,6 +58,9 @@
         $("#menu").animate({ 
           left: "0px",
         }, 300 );
+
+        $("#menuholder").css("pointer-events", "auto");
+        $( "#menuactivate" ).css("display" , "none")
 
         state.menu.visible = true;
         $( "#menuoff" ).show();
@@ -66,6 +78,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     var resizeall = function() {
+
+      
       
     /*
      if ($(window).width() < 4000) {
@@ -80,7 +94,7 @@
       }
       */
 
-      console.log( $(window).width() )
+      //console.log( $(window).width() )
 
       if ( $(window).width() >= 1860) { 
         $(".segmentholder").width( 1860);
@@ -103,7 +117,7 @@
 
         //MENU SIZE
 
-        if ($(window).width() < 1000) { $("#menuholder").css('transform', 'translate(-20%, -20%) scale(0.6)'); } else { $("#menuholder").css('transform', 'translate(-10%, -10%) scale(0.8)'); }
+        if ($(window).width() < 1000) { $("#menuholder").css('transform', 'translate(-20%, -20%) scale(0.6)'); state.menu.scale = 0.6 } else { $("#menuholder").css('transform', 'translate(-10%, -10%) scale(0.8)'); state.menu.scale = 0.8 }
 
         //FOOTER
 
@@ -157,10 +171,11 @@
           var s = 1-scale
           s = s / 2; 
           s = Math.round(s * 100) * -1;
-          console.log(s)
+          //console.log(s)
 
         
         $(".segment").css("transform", "translate(0%, "+s+"%) scale("+scale+")")
+        state.menu.scale = scale
 
         $("#topboxpad").height( $(".segment").height()  )
 
@@ -179,7 +194,8 @@
           var s = 1-scale
           s = s / 2; 
           s = Math.round(s * 100);
-          $(".segment").css("transform", "translate(-"+s+"%, -"+s+"%) scale("+scale+")")          
+          $(".segment").css("transform", "translate(-"+s+"%, -"+s+"%) scale("+scale+")")    
+          state.menu.scale = scale      
           $("#topboxpad").height( $(".segment").height()  )
         }
 
@@ -196,8 +212,9 @@
         var thumbpixels = (maxx - (15*thumbsx) - 15)/thumbsx
         $(".gallerythumb").width(thumbpixels)
         $(".gallerythumb").height(thumbpixels)
+        
 
-
+        fitgalleryimages()
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -293,8 +310,18 @@ var segment6off = function () {
     $( document ).ready(function() {
       resizeall();
       console.log( "ready!" );
+      generateMenu(1); //see contentbar.js function. number represents current page.
 
-      console.log($(window).width())
+
+    lightbox.option({
+      'resizeDuration': 200,
+      'wrapAround': true,
+    })
+
+
+
+
+      //console.log($(window).width())
 
  
 
@@ -333,11 +360,10 @@ var hideall = function (skip) {
 
 
 
-      $( "#menubutton" ).click(function() {
-        console.log( "menu click!" );     
-        state.menu.toggle();
+      $( "#menuactivate" ).click(function() { state.menu.toggle(); });
+      $( "#menubutton" ).click(function() { state.menu.toggle(); });
 
-      });
+      
 
       $( "#menuoff" ).mouseenter( function() { 
         console.log( "menu off!" );     
@@ -364,6 +390,38 @@ var hideall = function (skip) {
     $( window ).resize(function() {
       resizeall();
     });
+
+
+    function fitgalleryimages() {
+
+      $('.gallerythumb img').each(function(i, item) {
+          var img_height = $(item).height();
+          var img_width = $(item).width();
+          var img_ratio = img_height / img_width
+          var div_height = $(item).parent().height(); //square
+          var div_width = $(item).parent().width(); //square
+          var div_ratio = div_height / div_width
+
+          if (img_ratio >= div_ratio) {
+            $(item).css({'width': div_width, 'height': 'auto' });
+            //GET THE NEW height AFTER RESIZE
+            var img_height = $(item).height();            
+            //GET THE NEW HORIZONTAL MARGIN
+            var newMargin = (div_height-img_height)/2+'px';
+            //SET THE NEW HORIZONTAL MARGIN (EXCESS IMAGE height IS CROPPED)
+            $(item).css({'margin-top': newMargin });
+          } else {
+            $(item).css({'width': 'auto', 'height': div_height });
+            //GET THE NEW WIDTH AFTER RESIZE
+            var img_width = $(item).width();            
+            //GET THE NEW HORIZONTAL MARGIN
+            var newMargin = (div_width-img_width)/2+'px';
+            //SET THE NEW HORIZONTAL MARGIN (EXCESS IMAGE WIDTH IS CROPPED)
+            $(item).css({'margin-left': newMargin });
+          }
+      });
+
+    }
 
 
   </script>
@@ -459,6 +517,16 @@ a.menulink div:hover { color: #fff; }
   position: absolute; top: 37px; color: white; left: 488px; font-size: 30px; font-family: 'ScoutItalic'; 
 }
 
+.gallerythumb {
+  width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;
+          background-size: cover;  
+        background-repeat: no-repeat; 
+        background-position: center center; 
+        overflow: hidden; 
+}
+
+
+
 
 </style>
 
@@ -474,7 +542,8 @@ a.menulink div:hover { color: #fff; }
 
 <!-- MENU START-->
 
-<div id="menuholder" style="position: fixed;top: 0px; transform: translate(-20%, -20%) scale(0.6);">
+
+<div id="menuholder" style="position: fixed;top: 0px; transform: translate(-20%, -20%) scale(0.6); pointer-events: none;">
   <div id="menu" style="height: 1350px; width: 600px; left: -445px; position: relative; ">
 
  
@@ -487,95 +556,23 @@ a.menulink div:hover { color: #fff; }
 
       <div style="position: absolute; left: 527px; top: 15px; ">
         <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#2aaae1" />
+              <polygon id="menupagechevron" points="29,0 45,0 17,63 0,63" style="fill:#fff" />
             </svg>
       </div>
            
 
       <div class="boldf" style="position: absolute; top: 17px; left: 460px; font-size: 28px; font-family: 'ScoutItalic'; ">CONTENT</div>
       <div style="position: absolute; top: 38px; left: 490px; font-size: 28px; font-family: 'ScoutItalic'; ">BAR</div>
-      <div id="menupagename" style="position: absolute; top: 7px; left: 550px; font-size: 50px; font-family: 'ScoutBold'; ">CONCEPTS</div>
+      <div id="menupagename" style="position: absolute; top: 7px; left: 550px; font-size: 50px; font-family: 'ScoutBold'; "></div>
 
-      
-      <!-- MENU CONCEPTS -->
-      <div class="menuitem" style="position: absolute; z-index: 100; top: 100px; left: 185px; width: 300px; height: 64px;">
-          <div style="position: relative;">
-            
-            <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#fff" />
-            </svg>
+      <!-- MENU Items --><div id="menuItems"></div>     
 
-            <a class="menulink" href="index.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'; ">HOME</div></a>
-          </div>
-      </div>       
+     <div id="menubutton" style="cursor: pointer; position: absolute; width: 220px; left: 445px; height: 100px; z-index: 9999;"></div>
 
-      <!-- MENU AUDIENCE -->
-      <div class="menuitem" style="position: absolute; z-index: 100; top: 170px; left: 153px; width: 300px; height: 64px;">
-          <div style="position: relative;">
-            
-            <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#c1272d" />
-            </svg>
-
-            <a class="menulink" href="audience.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">AUDIENCE</div></a>
-          </div>
-      </div>  
-
-
-      <!-- MENU PHOTOBOOTH -->
-      <div class="menuitem" style="position: absolute; z-index: 100; top: 240px; left: 122px; width: 300px; height: 64px;">
-          <div style="position: relative;">
-            
-            <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#8bc541" />
-            </svg>
-
-
-            <a class="menulink" href="photobooth.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">PHOTOBOOTH</div></a>
-          </div>
-      </div>  
-
-      <!-- MENU CLIPAISLE -->
-      <div class="menuitem" style="position: absolute; z-index: 100; top: 310px; left: 91px; width: 300px; height: 64px;">
-          <div style="position: relative;">
-            
-            <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#eb416d" />
-            </svg>
-
-            <a class="menulink" href="clipaisle.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">CLIPAISLE</div></a>
-          </div>
-      </div>  
-
-      <!-- MENU STUDIO -->
-      <div class="menuitem" style="position: absolute; z-index: 100; top: 384px; left: 59px; width: 300px; height: 64px;">
-          <div style="position: relative;">
-            
-            <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#f69221" />
-            </svg>
-
-            <a class="menulink" href="studio.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">STUDIO</div></a>
-          </div>
-      </div>  
-
-      <!-- MENU CONTACT US -->
-      <div class="menuitem" style="position: absolute; z-index: 100; top: 456px; left: 29px; width: 300px; height: 64px;">
-          <div style="position: relative;">
-            
-            <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#333333" />
-            </svg>
-
-            <a class="menulink" href="contact.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">CONTACT</div></a>
-          </div>
-      </div>        
-
-     <div id="menubutton" style="cursor: pointer; position: absolute; width: 220px; left: 445px; height: 100px; " >
-      </div>
-
+  </div>
 </div>
-</div>
+
+<div id="menuactivate" style="cursor: pointer; width: 220px; height: 60px; left:5px; top: 5px; z-index: 9999; position: fixed;"></div>
 
 <!-- MENU END-->
 
@@ -658,65 +655,40 @@ a.menulink div:hover { color: #fff; }
     <div style="clear: both;"></div>
 </div>
 
+
+
+
 <!-- gallery START -->
  
  <div style="background: background: #f00; ">
     <div class="segmentholder" style="margin: 0px auto 50px; max-width: 1860px; ">
      <div id="gallerythumbholder" style="margin: 15px; background: #2aaae1;">
 
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
 
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+      
+      <a class="gallerythumb" href="images/block_jaguar.jpg" data-lightbox="example-set" data-title="Click anywhere outside the image or the X to the right to close.">
+        <img class="example-image" src="images/block_jaguar.jpg" alt="" style="background: #1a1a1a;  float:left;" />
+      </a>
 
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+      <a class="gallerythumb" href="images/block_clipaisle.jpg" data-lightbox="example-set" data-title="Click anywhere outside the image or the X to the right to close.">
+        <img class="example-image" src="images/block_clipaisle.jpg" alt="" style="background: #1a1a1a;  float:left;" />
+      </a>
+            
+      <a class="gallerythumb" href="images/block_studio.jpg" data-lightbox="example-set" data-title="Click anywhere outside the image or the X to the right to close.">
+        <img class="example-image" src="images/block_studio.jpg" alt="" style="background: #1a1a1a;  float:left;" />
+      </a>
 
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+      <a class="gallerythumb" href="images/block_audience.jpg" data-lightbox="example-set" data-title="Click anywhere outside the image or the X to the right to close.">
+        <img class="example-image" src="images/block_audience.jpg" alt="" style="background: #1a1a1a;  float:left;" />
+      </a>
 
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+      <a class="gallerythumb" href="images/block_work.jpg" data-lightbox="example-set" data-title="Click anywhere outside the image or the X to the right to close.">
+        <img class="example-image" src="images/block_work.jpg" alt="" style="background: #1a1a1a;  float:left;" />
+      </a>
 
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
-       <div class="gallerythumb" style="width:100px;height: 100px; background: #1a1a1a; margin-left: 15px; margin-top: 15px; float:left;"></div>
+      <a class="gallerythumb" href="images/block_contact.jpg" data-lightbox="example-set" data-title="Click anywhere outside the image or the X to the right to close.">
+        <img class="example-image" src="images/block_contact.jpg" alt="" style="background: #1a1a1a;  float:left;" />
+      </a>
 
 
        <div style="clear: both; margin-bottom: 15px;"></div>

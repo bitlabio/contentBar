@@ -24,7 +24,7 @@
   <link rel="icon" type="image/png" href="images/favicon.png">
 
   <script type="text/javascript" src="jquery-3.1.1.min.js"></script>
-  <script type="text/javascript" src="libs.js"></script>
+  <script type="text/javascript" src="contentbar.js"></script>
   <script type="text/javascript">
 
     var state = {}
@@ -293,6 +293,7 @@ var segment6off = function () {
     $( document ).ready(function() {
       resizeall();
       console.log( "ready!" );
+      generateMenu(3); //see contentbar.js function. number represents current page.
 
       console.log($(window).width())
 
@@ -487,96 +488,20 @@ a.menulink div:hover { color: #fff; }
 
       <div style="position: absolute; left: 527px; top: 15px; ">
         <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#8bc541" />
+              <polygon id="menupagechevron" points="29,0 45,0 17,63 0,63" style="fill:#fff" />
             </svg>
       </div>
            
 
       <div class="boldf" style="position: absolute; top: 17px; left: 460px; font-size: 28px; font-family: 'ScoutItalic'; ">CONTENT</div>
       <div style="position: absolute; top: 38px; left: 490px; font-size: 28px; font-family: 'ScoutItalic'; ">BAR</div>
-      <div id="menupagename" style="position: absolute; top: 7px; left: 550px; font-size: 50px; font-family: 'ScoutBold'; ">PHOTOBOOTH</div>
+      <div id="menupagename" style="position: absolute; top: 7px; left: 550px; font-size: 50px; font-family: 'ScoutBold'; "></div>
 
-      
-      <!-- MENU CONCEPTS -->
-      <div class="menuitem" style="position: absolute; z-index: 100; top: 100px; left: 185px; width: 300px; height: 64px;">
-          <div style="position: relative;">
-            
-            <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#fff" />
-            </svg>
+      <!-- MENU Items --><div id="menuItems"></div>     
 
-            <a class="menulink" href="index.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'; ">HOME</div></a>
-          </div>
-      </div>       
+     <div id="menubutton" style="cursor: pointer; position: absolute; width: 220px; left: 445px; height: 100px;"></div>
 
-   
-
-      <!-- MENU AUDIENCE -->
-      <div class="menuitem" style="position: absolute; z-index: 100; top: 170px; left: 153px; width: 300px; height: 64px;">
-          <div style="position: relative;">
-            
-            <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#2aaae1" />
-            </svg>
-
-            <a class="menulink" href="concepts.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">CONCEPTS</div></a>
-          </div>
-      </div>  
-
-
-      <!-- MENU PHOTOBOOTH -->
-      <div class="menuitem" style="position: absolute; z-index: 100; top: 240px; left: 122px; width: 300px; height: 64px;">
-          <div style="position: relative;">
-            
-            <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#c1272d" />
-            </svg>
-
-
-            <a class="menulink" href="audience.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">AUDIENCE</div></a>
-          </div>
-      </div>  
-
-      <!-- MENU CLIPAISLE -->
-      <div class="menuitem" style="position: absolute; z-index: 100; top: 310px; left: 91px; width: 300px; height: 64px;">
-          <div style="position: relative;">
-            
-            <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#eb416d" />
-            </svg>
-
-            <a class="menulink" href="clipaisle.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">CLIPAISLE</div></a>
-          </div>
-      </div>  
-
-      <!-- MENU STUDIO -->
-      <div class="menuitem" style="position: absolute; z-index: 100; top: 384px; left: 59px; width: 300px; height: 64px;">
-          <div style="position: relative;">
-            
-            <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#f69221" />
-            </svg>
-
-            <a class="menulink" href="studio.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">STUDIO</div></a>
-          </div>
-      </div>  
-
-      <!-- MENU CONTACT US -->
-      <div class="menuitem" style="position: absolute; z-index: 100; top: 456px; left: 29px; width: 300px; height: 64px;">
-          <div style="position: relative;">
-            
-            <svg height="64" width="45" style="position: absolute;">
-              <polygon points="29,0 45,0 17,63 0,63" style="fill:#333333" />
-            </svg>
-
-            <a class="menulink" href="contact.html"><div style="position: absolute; top: -15px; left: 25px; font-size: 58px; font-family: 'ScoutBold'">CONTACT</div></a>
-          </div>
-      </div>        
-
-     <div id="menubutton" style="cursor: pointer; position: absolute; width: 220px; left: 445px; height: 100px; " >
-      </div>
-
-</div>
+  </div>
 </div>
 
 <!-- MENU END-->
