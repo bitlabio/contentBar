@@ -47,7 +47,7 @@
 
         state.menu.visible = false;
         $( "#menuoff" ).hide();
-        $("#menuholder").css("z-index", 0)
+        $("#menuholder").css("z-index", 100)
         $("#graymenu").css("z-index", 0)
         $("#menupagename").fadeIn();
       } else {
@@ -417,7 +417,7 @@ a.menulink div:hover { color: #fff; }
 <!-- MENU START-->
 
 
-<div id="menuholder" style="position: fixed;top: 0px; transform: translate(-20%, -20%) scale(0.6); pointer-events: none;">
+<div id="menuholder" style="position: fixed;top: 0px; transform: translate(-20%, -20%) scale(0.6); pointer-events: none; z-index: 100;">
   <div id="menu" style="height: 1350px; width: 600px; left: -445px; position: relative; ">
 
  
@@ -447,7 +447,7 @@ a.menulink div:hover { color: #fff; }
 </div>
 
 <div id="menuactivate" style="cursor: pointer; width: 220px; height: 60px; left:5px; top: 5px; z-index: 9999; position: fixed;"></div>
-
+<div style="width: 100%; z-index: 99; background: #fff; height: 60px; top: 0; left: 0; position: fixed;"></div>
 <!-- MENU END-->
 
 
