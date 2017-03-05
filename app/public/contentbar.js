@@ -5,14 +5,14 @@ function generateMenu(page) {
       //generate the menu
 
       var menu = []
-      menu.push({text:"home", link:"index.html", color: "#ffffff"})
-      menu.push({text:"concepts", link:"concepts.html", color: "#2aaae1"})
-      menu.push({text:"audience", link:"audience.html", color: "#c1272d"})
-      menu.push({text:"photobooth", link:"photobooth.html", color: "#8bc541"})
-      menu.push({text:"clipaisle", link:"clipaisle.html", color: "#eb416d"})
-      menu.push({text:"studio", link:"studio.html", color: "#f69221"})
-      menu.push({text:"work", link:"work.html", color: "#8747bf"})
-      menu.push({text:"contact", link:"contact.html", color: "#333333"})
+      menu.push({text:"home", link:"/", color: "#ffffff"})
+      menu.push({text:"concepts", link:"./concepts", color: "#2aaae1"})
+      menu.push({text:"audience", link:"./audience", color: "#c1272d"})
+      menu.push({text:"photobooth", link:"/photobooth", color: "#8bc541"})
+      menu.push({text:"clipaisle", link:"/clipaisle", color: "#eb416d"})
+      menu.push({text:"studio", link:"/studio", color: "#f69221"})
+      menu.push({text:"work", link:"/work", color: "#8747bf"})
+      menu.push({text:"contact", link:"/contact", color: "#333333"})
 
       var menuitemshtml = '';
       var scale = 0.90;
