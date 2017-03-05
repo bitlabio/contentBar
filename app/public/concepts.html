@@ -381,7 +381,24 @@ var hideall = function (skip) {
       
       waitForWebfonts(['ScoutItalic', 'ScoutBold', 'ScoutThin'], function() {
         resizeall();
+        fitgalleryimages();
       });
+
+      var img = document.querySelector('img')
+
+      function loaded() {
+        console.log("loaded.")
+        fitgalleryimages();
+      }
+
+      if (img.complete) {
+        loaded()
+      } else {
+        img.addEventListener('load', loaded)
+        img.addEventListener('error', function() {
+            alert('error')
+        })
+      }
 
     });
 
@@ -393,6 +410,8 @@ var hideall = function (skip) {
 
 
     function fitgalleryimages() {
+      var runagain = 0; 
+      console.log("fit.")
 
       $('.gallerythumb img').each(function(i, item) {
           var img_height = $(item).height();
@@ -401,26 +420,31 @@ var hideall = function (skip) {
           var div_height = $(item).parent().height(); //square
           var div_width = $(item).parent().width(); //square
           var div_ratio = div_height / div_width
+          if (isNaN(img_height)) { runagain = 1;}
+          if (isNaN(img_width)) { runagain = 1;}
 
-          if (img_ratio >= div_ratio) {
-            $(item).css({'width': div_width, 'height': 'auto' });
-            //GET THE NEW height AFTER RESIZE
-            var img_height = $(item).height();            
-            //GET THE NEW HORIZONTAL MARGIN
-            var newMargin = (div_height-img_height)/2+'px';
-            //SET THE NEW HORIZONTAL MARGIN (EXCESS IMAGE height IS CROPPED)
-            $(item).css({'margin-top': newMargin });
-          } else {
-            $(item).css({'width': 'auto', 'height': div_height });
-            //GET THE NEW WIDTH AFTER RESIZE
-            var img_width = $(item).width();            
-            //GET THE NEW HORIZONTAL MARGIN
-            var newMargin = (div_width-img_width)/2+'px';
-            //SET THE NEW HORIZONTAL MARGIN (EXCESS IMAGE WIDTH IS CROPPED)
-            $(item).css({'margin-left': newMargin });
+          if (runagain == 0) { 
+            if (img_ratio >= div_ratio) {
+              $(item).css({'width': div_width, 'height': 'auto' });
+              //GET THE NEW height AFTER RESIZE
+              var img_height = $(item).height();            
+              //GET THE NEW HORIZONTAL MARGIN
+              var newMargin = (div_height-img_height)/2+'px';
+              //SET THE NEW HORIZONTAL MARGIN (EXCESS IMAGE height IS CROPPED)
+              $(item).css({'margin-top': newMargin*-1 });
+            } else {
+              $(item).css({'width': 'auto', 'height': div_height });
+              //GET THE NEW WIDTH AFTER RESIZE
+              var img_width = $(item).width();            
+              //GET THE NEW HORIZONTAL MARGIN
+              var newMargin = (div_width-img_width)/2+'px';
+              //SET THE NEW HORIZONTAL MARGIN (EXCESS IMAGE WIDTH IS CROPPED)
+              $(item).css({'margin-left': newMargin*-1 });
+            }
           }
-      });
 
+      });
+      if (runagain == 1) { fitgalleryimages(); }
     }
 
 
